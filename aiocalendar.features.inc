@@ -1,37 +1,30 @@
 <?php
 
 /**
- * Implementation of hook_content_default_fields().
- */
-function aiocalendar_content_default_fields() {
-  module_load_include('inc', 'aiocalendar', 'aiocalendar.defaults');
-  $args = func_get_args();
-  return call_user_func_array('_aiocalendar_content_default_fields', $args);
-}
-
-/**
  * Implementation of hook_node_info().
  */
 function aiocalendar_node_info() {
-  module_load_include('inc', 'aiocalendar', 'aiocalendar.features.node');
-  $args = func_get_args();
-  return call_user_func_array('_aiocalendar_node_info', $args);
+  $items = array(
+    'calendar_event' => array(
+      'name' => t('Calendar Event'),
+      'module' => 'features',
+      'description' => t('Events to be shown in the All-in-One Calendar'),
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'has_body' => '1',
+      'body_label' => t('Description'),
+      'min_word_count' => '0',
+      'help' => '',
+    ),
+  );
+  return $items;
 }
 
 /**
- * Implementation of hook_user_default_permissions().
+ * Implementation of hook_views_api().
  */
-function aiocalendar_user_default_permissions() {
-  module_load_include('inc', 'aiocalendar', 'aiocalendar.defaults');
-  $args = func_get_args();
-  return call_user_func_array('_aiocalendar_user_default_permissions', $args);
-}
-
-/**
- * Implementation of hook_views_default_views().
- */
-function aiocalendar_views_default_views() {
-  module_load_include('inc', 'aiocalendar', 'aiocalendar.features.views');
-  $args = func_get_args();
-  return call_user_func_array('_aiocalendar_views_default_views', $args);
+function aiocalendar_views_api() {
+  return array(
+    'api' => '2',
+  );
 }

@@ -25,5 +25,5 @@ function aiocalendar_install() {
     ),
   );
   
-  taxonomy_save_vocabulary(&$vocab);
+  taxonomy_save_vocabulary($vocab);
 }
