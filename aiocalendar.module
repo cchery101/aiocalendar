@@ -63,21 +63,6 @@ function aiocalendar_views_pre_render (&$view) {
   }
 }
 
-/**
- * Implementation of hook_strongarm().
- */
-function aiocalendar_strongarm() {
-  // Strongarm variables for views_checkbox.
-  $conf = array();
-  $conf['views_checkboxes_limit'] = '20';
-  $conf['views_checkboxes_listsize'] = '20';
-  $conf['views_checkboxes_checkbox_enable'] = 1;
-  $conf['views_checkboxes_radio_enable'] = 1;
-  $conf['views_checkboxes_sizeup'] = 1;
-  
-  return $conf;
-}
-
 /*
  * Override theme_calendar_ical_icon() so we can override the url produced.
  */
