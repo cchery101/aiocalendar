@@ -9,7 +9,7 @@ function aiocalendar_init() {
   //dpm(realpath(drupal_get_path('module', 'phpmailer') . '/phpmailer/class.phpmailer.php'));
   //dpm("boo");
   drupal_add_css(drupal_get_path('module', 'aiocalendar') . "/aiocalendar.css");
-  drupal_add_css(drupal_get_path('module', 'aiocalendar') . "/js/start_ui_theme/ui.all.css");
+  // drupal_add_css(drupal_get_path('module', 'aiocalendar') . "/js/start_ui_theme/ui.all.css");
   drupal_add_css(file_directory_path() . "/aiocalendar_legend.css");
   drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/aiocalendar.js");
   drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/js/jquery.bt.min.js");
