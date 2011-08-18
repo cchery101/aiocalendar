@@ -266,3 +266,24 @@ function aiocalendar_email_event_form_submit($form, &$form_submit) {
     drupal_set_message("Mail has been sent");  
   }
 }
+
+
+
+/**
+ * Implements hook_form_alter().
+ * Let's add a quick link to the taxonomy selector to add a link to add new terms.
+ */
+function aiocalendar_form_alter(&$form, &$form_state, $form_id) {
+  
+  switch ($form_id) {
+    case 'calendar_event_node_form':
+      $aiocalendar_event_type_vid = variable_get('aiocalendar_event_type_vid', 0);
+            
+      $form['taxonomy'][$aiocalendar_event_type_vid]['#description'] = l(t('Add more categories here.'), 'admin/content/taxonomy/'. $aiocalendar_event_type_vid .'/add/term');
+         
+      break;
+    
+  }
+  
+  
+}
