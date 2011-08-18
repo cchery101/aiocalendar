@@ -45,8 +45,8 @@ function aiocalendar_views_pre_render (&$view) {
       && isset($view->date_info->calendar_colors_taxonomy)) {
     
     // Add form for emailing events. We hide it via css.
-    $email_event_form = drupal_get_form('aiocalendar_email_event_form');
-    $view->attachment_before = $email_event_form;
+    // $email_event_form = drupal_get_form('aiocalendar_email_event_form');
+    // $view->attachment_before = $email_event_form;
     
     $calendar_colors = $view->date_info->calendar_colors_taxonomy;
     
@@ -123,149 +123,149 @@ function phptemplate_feed_icon($url, $title) {
   }
 }
 
-function aiocalendar_email_event_form($form_state) {
-  $form['your_email'] = array(
-    '#type' => 'textfield', 
-    '#title' => t('Your Email'),
-    '#size' => 30,
-    '#maxlength' => 64, 
-  );
-  $form['to_emails'] = array(
-    '#type' => 'textarea', 
-    '#title' => t('Friend(s)\' email address. One per line'),
-    '#size' => 30,
-    '#rows' => 3,
-  );
-  $form['message'] = array(
-    '#type' => 'textarea', 
-    '#title' => t('Message (optional)'),
-    '#size' => 30,
-    '#rows' => 3,
-  );
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Submit'));
-  
-  $form['nid'] = array(
-    '#type' => 'hidden',
-    '#value' => '123',
-  );
-  $form['ical_feed_url'] = array(
-    '#type' => 'hidden',
-    '#value' => '123',
-  );
-  
-  return $form;
-}
+// function aiocalendar_email_event_form($form_state) {
+//   $form['your_email'] = array(
+//     '#type' => 'textfield', 
+//     '#title' => t('Your Email'),
+//     '#size' => 30,
+//     '#maxlength' => 64, 
+//   );
+//   $form['to_emails'] = array(
+//     '#type' => 'textarea', 
+//     '#title' => t('Friend(s)\' email address. One per line'),
+//     '#size' => 30,
+//     '#rows' => 3,
+//   );
+//   $form['message'] = array(
+//     '#type' => 'textarea', 
+//     '#title' => t('Message (optional)'),
+//     '#size' => 30,
+//     '#rows' => 3,
+//   );
+//   $form['submit'] = array(
+//     '#type' => 'submit',
+//     '#value' => t('Submit'));
+//   
+//   $form['nid'] = array(
+//     '#type' => 'hidden',
+//     '#value' => '123',
+//   );
+//   $form['ical_feed_url'] = array(
+//     '#type' => 'hidden',
+//     '#value' => '123',
+//   );
+//   
+//   return $form;
+// }
 
-function aiocalendar_email_event_form_submit($form, &$form_submit) {
-  require_once(realpath(drupal_get_path('module', 'phpmailer') . '/phpmailer/class.phpmailer.php'));
-  $node = node_load($form['#post']['nid']);
-
-  if (valid_email_address($form['#post']['your_email'])) {
-    $from_email = $form['#post']['your_email'];
-  }
-  else {
-    drupal_set_message(t("We couldn't send the notice as your email
-      (@email) is not a valid email address. Please try again.",
-      array('@email' => $form['#post']['your_email'])));
-    return;
-  }
-
-  $to_emails = $form['#post']['to_emails'];
-  $to_emails = explode("\n", $to_emails);
-  
-  // Clean up emails.
-  foreach ($to_emails as &$email) {
-    $email = check_plain(trim($email));  
-  }
-  
-  // Validate to emails.
-  foreach ($to_emails as &$email) {
-    if (!valid_email_address($email)) {
-      drupal_set_message(t("We couldn't send the notice as one of emails
-      (@email) is not a valid email address. Please try again.",
-      array('@email' => $email)));
-      return;
-    }
-  }
-  
-  $message = check_plain($form['#post']['message']);
-  $event_nid = check_plain($form['#post']['nid']);
-  $ical_feed = check_plain($form['#post']['ical_feed_url']);
-  
-  // iCal feed includes too much.
-  $search = preg_match("/\/(calendar\/.*)/", $ical_feed, $matches);
-  $ical_feed = $matches[1];
-  $ical_url = url($ical_feed, array('absolute' => true));
-  
-  // Grab the ical file.
-  $ical_file = file_get_contents($ical_url);
-  
-  // Send email using PHPMailer
-  $mail = new PHPMailer();
-  $mail->CharSet = "UTF-8";
-
-  if (!empty($message)) {
-    $body .= "<strong>Message from sender:</strong> <br />";
-    $body .= "<p>" . $message . "</p><br />";  
-  }
-  
-  // Add title.
-  $body .= "<h2>" . $node->title . "</h2><br />";
-  
-  // Add Date.
-  $format = "M j, Y";
-  $format2 = "g:iA";
-  if (count($node->field_event_date) > 1) {
-    $body .= "<strong>Dates:</strong> " . "<br />";
-    foreach ($node->field_event_date as $date) {
-      $body .= date($format, strtotime($date['value'])) . " at " .
-      date($format2, strtotime($date['value']))
-      . " &mdash; " .
-      date($format, strtotime($date['value2']))  . " at " .
-      date($format2, strtotime($date['value'])) . "<br />";
-    }
-    $body .= "<br />";
-  }
-  else {
-    $body .= "<strong>Date:</strong> " . date($format, strtotime($node->field_event_date[0]['value']))  . " at " .
-      date($format2, strtotime($date['value']))
-      . " - " .
-      date($format, strtotime($node->field_event_date[0]['value2']))  . " at " .
-      date($format2, strtotime($date['value'])) . "<br />";
-  }
-  
-  // Add location.
-  $body .= "<strong>Location:</strong> " . array_pop($node->field_event_location[0]) . "<br />";
-  
-  $body .= $node->body;
-  
-  $mail->IsSMTP(); // telling the class to use SMTP
-  $mail->SMTPDebug  = 0;
-  $mail->Host = "gateway.byu.edu"; // Use Gateway as our SMTP server.
-  
-  $mail->SetFrom($from_email);
-  
-  $mail->Subject = $node->title;
-  
-  // TODO add message to body, add begin + end times, add attachment: ical file at end, use actual email addresses.
-  //$mail->MsgHTML($body);
-  $mail->Body = drupal_html_to_text($body);
-  //$mail->AltBody = drupal_html_to_text($body);
-  
-  foreach ($to_emails as $email) {
-    $mail->AddAddress($email);  
-  }
-  
-  $mail->AddStringAttachment($ical_file, $node->title . ".ics");
-  $sendResult = $mail->Send();
-  if($sendResult == false) {
-    watchdog('php',$mail->ErrorInfo,array('%title' => check_plain($node->title)));
-  } else {
-    drupal_set_message("Mail has been sent");  
-  }
-}
+// function aiocalendar_email_event_form_submit($form, &$form_submit) {
+//   require_once(realpath(drupal_get_path('module', 'phpmailer') . '/phpmailer/class.phpmailer.php'));
+//   $node = node_load($form['#post']['nid']);
+// 
+//   if (valid_email_address($form['#post']['your_email'])) {
+//     $from_email = $form['#post']['your_email'];
+//   }
+//   else {
+//     drupal_set_message(t("We couldn't send the notice as your email
+//       (@email) is not a valid email address. Please try again.",
+//       array('@email' => $form['#post']['your_email'])));
+//     return;
+//   }
+// 
+//   $to_emails = $form['#post']['to_emails'];
+//   $to_emails = explode("\n", $to_emails);
+//   
+//   // Clean up emails.
+//   foreach ($to_emails as &$email) {
+//     $email = check_plain(trim($email));  
+//   }
+//   
+//   // Validate to emails.
+//   foreach ($to_emails as &$email) {
+//     if (!valid_email_address($email)) {
+//       drupal_set_message(t("We couldn't send the notice as one of emails
+//       (@email) is not a valid email address. Please try again.",
+//       array('@email' => $email)));
+//       return;
+//     }
+//   }
+//   
+//   $message = check_plain($form['#post']['message']);
+//   $event_nid = check_plain($form['#post']['nid']);
+//   $ical_feed = check_plain($form['#post']['ical_feed_url']);
+//   
+//   // iCal feed includes too much.
+//   $search = preg_match("/\/(calendar\/.*)/", $ical_feed, $matches);
+//   $ical_feed = $matches[1];
+//   $ical_url = url($ical_feed, array('absolute' => true));
+//   
+//   // Grab the ical file.
+//   $ical_file = file_get_contents($ical_url);
+//   
+//   // Send email using PHPMailer
+//   $mail = new PHPMailer();
+//   $mail->CharSet = "UTF-8";
+// 
+//   if (!empty($message)) {
+//     $body .= "<strong>Message from sender:</strong> <br />";
+//     $body .= "<p>" . $message . "</p><br />";  
+//   }
+//   
+//   // Add title.
+//   $body .= "<h2>" . $node->title . "</h2><br />";
+//   
+//   // Add Date.
+//   $format = "M j, Y";
+//   $format2 = "g:iA";
+//   if (count($node->field_event_date) > 1) {
+//     $body .= "<strong>Dates:</strong> " . "<br />";
+//     foreach ($node->field_event_date as $date) {
+//       $body .= date($format, strtotime($date['value'])) . " at " .
+//       date($format2, strtotime($date['value']))
+//       . " &mdash; " .
+//       date($format, strtotime($date['value2']))  . " at " .
+//       date($format2, strtotime($date['value'])) . "<br />";
+//     }
+//     $body .= "<br />";
+//   }
+//   else {
+//     $body .= "<strong>Date:</strong> " . date($format, strtotime($node->field_event_date[0]['value']))  . " at " .
+//       date($format2, strtotime($date['value']))
+//       . " - " .
+//       date($format, strtotime($node->field_event_date[0]['value2']))  . " at " .
+//       date($format2, strtotime($date['value'])) . "<br />";
+//   }
+//   
+//   // Add location.
+//   $body .= "<strong>Location:</strong> " . array_pop($node->field_event_location[0]) . "<br />";
+//   
+//   $body .= $node->body;
+//   
+//   $mail->IsSMTP(); // telling the class to use SMTP
+//   $mail->SMTPDebug  = 0;
+//   $mail->Host = "gateway.byu.edu"; // Use Gateway as our SMTP server.
+//   
+//   $mail->SetFrom($from_email);
+//   
+//   $mail->Subject = $node->title;
+//   
+//   // TODO add message to body, add begin + end times, add attachment: ical file at end, use actual email addresses.
+//   //$mail->MsgHTML($body);
+//   $mail->Body = drupal_html_to_text($body);
+//   //$mail->AltBody = drupal_html_to_text($body);
+//   
+//   foreach ($to_emails as $email) {
+//     $mail->AddAddress($email);  
+//   }
+//   
+//   $mail->AddStringAttachment($ical_file, $node->title . ".ics");
+//   $sendResult = $mail->Send();
+//   if($sendResult == false) {
+//     watchdog('php',$mail->ErrorInfo,array('%title' => check_plain($node->title)));
+//   } else {
+//     drupal_set_message("Mail has been sent");  
+//   }
+// }
 
 
 
