@@ -6,56 +6,6 @@
 function _aiocalendar_content_default_fields() {
   $fields = array();
 
-  // Exported field: field_event_contact
-  $fields[] = array(
-    'field_name' => 'field_event_contact',
-    'type_name' => 'calendar_event',
-    'display_settings' => array(
-      'weight' => '-2',
-      'parent' => '',
-      'label' => array(
-        'format' => 'above',
-      ),
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '4' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'token' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-    ),
-    'widget_active' => '1',
-    'type' => 'text',
-    'required' => '1',
-    'multiple' => '0',
-    'module' => 'text',
-    'active' => '1',
-    'text_processing' => '0',
-    'max_length' => '',
-    'allowed_values' => '',
-    'allowed_values_php' => '',
-    'widget' => array(
-      'matching' => '0',
-      'num_results' => '10',
-      'default_value' => NULL,
-      'default_value_php' => NULL,
-      'label' => 'Contact',
-      'weight' => '-2',
-      'description' => '',
-      'type' => 'cck_autocomplete',
-      'module' => 'cck_autocomplete',
-    ),
-  );
-
   // Exported field: field_event_date
   $fields[] = array(
     'field_name' => 'field_event_date',
