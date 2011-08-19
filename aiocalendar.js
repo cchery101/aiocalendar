@@ -1,51 +1,51 @@
-Drupal.behaviors.aioCheckAll = function (context) {
-  // HTML for checkall checkbox.
-  checkall_html = '<div id="checkall" class="form-item">         \
- <label><input type="checkbox"    \
-  class="form-checkbox""/> \
-  <span id="checkall-text">Check All</span></label>                                               \
-</div>                                                            \
-  ';
-  
-  // Add html for the check all checkbox. 
-  $("#views-exposed-form-events-calendar-calendar-1 .form-checkboxes")
-  .prepend(checkall_html);
-  
-  // If all checkboxes are checked, set the check all as checked as well.
-  var allchecked = true;
-  $("form#views-exposed-form-events-calendar-calendar-1 .option [type='checkbox']").each(function() {
-    if ($(this).attr('checked') == false) {
-      allchecked = false;
-    }
-  });
-  
-  // If all are checked, change text to uncheck all.
-  if (allchecked) {
-    $("#checkall-text").html("Uncheck All");
-    
-    // If Uncheck all is clicked, unselect all but do not submit form automatically as Views
-    // doesn't all you to submit a form w/ no checkboxes selected.
-    $("#checkall [type='checkbox']").bind(($.browser.msie ? "click" : "change"), function () {
-      var checked_value = $("#checkall [type='checkbox']").attr('checked');
-      $("form#views-exposed-form-events-calendar-calendar-1 .option [type='checkbox']").each(function() {
-        $(this).attr('checked', !checked_value);
-      });
-    });  
-  }
-  // Else, check all and resubmit.
-  else {
-    // Set change event for the checkall checkbox.
-    $("#checkall [type='checkbox']").bind(($.browser.msie ? "click" : "change"), function () {
-      $("form#views-exposed-form-events-calendar-calendar-1 .option [type='checkbox']").each(function() {
-        $(this).attr('checked', true);
-      });
-      
-      // Resubmit form.
-      $("form#views-exposed-form-events-calendar-calendar-1").submit();
-    });  
-  }
-  
-}
+// Drupal.behaviors.aioCheckAll = function (context) {
+//   // HTML for checkall checkbox.
+//   checkall_html = '<div id="checkall" class="form-item">         \
+//  <label><input type="checkbox"    \
+//   class="form-checkbox""/> \
+//   <span id="checkall-text">Check All</span></label>                                               \
+// </div>                                                            \
+//   ';
+//   
+//   // Add html for the check all checkbox. 
+//   $("#views-exposed-form-events-calendar-calendar-1 .form-checkboxes")
+//   .prepend(checkall_html);
+//   
+//   // If all checkboxes are checked, set the check all as checked as well.
+//   var allchecked = true;
+//   $("form#views-exposed-form-events-calendar-calendar-1 .option [type='checkbox']").each(function() {
+//     if ($(this).attr('checked') == false) {
+//       allchecked = false;
+//     }
+//   });
+//   
+//   // If all are checked, change text to uncheck all.
+//   if (allchecked) {
+//     $("#checkall-text").html("Uncheck All");
+//     
+//     // If Uncheck all is clicked, unselect all but do not submit form automatically as Views
+//     // doesn't all you to submit a form w/ no checkboxes selected.
+//     $("#checkall [type='checkbox']").bind(($.browser.msie ? "click" : "change"), function () {
+//       var checked_value = $("#checkall [type='checkbox']").attr('checked');
+//       $("form#views-exposed-form-events-calendar-calendar-1 .option [type='checkbox']").each(function() {
+//         $(this).attr('checked', !checked_value);
+//       });
+//     });  
+//   }
+//   // Else, check all and resubmit.
+//   else {
+//     // Set change event for the checkall checkbox.
+//     $("#checkall [type='checkbox']").bind(($.browser.msie ? "click" : "change"), function () {
+//       $("form#views-exposed-form-events-calendar-calendar-1 .option [type='checkbox']").each(function() {
+//         $(this).attr('checked', true);
+//       });
+//       
+//       // Resubmit form.
+//       $("form#views-exposed-form-events-calendar-calendar-1").submit();
+//     });  
+//   }
+//   
+// }
 
 themeToolTips = function(data) {
   // Object should include title, time, location, image, and paragraph
@@ -252,7 +252,6 @@ Drupal.behaviors.aio_beautytip = function (context) {
   setBeautyTipClickEvent();
   
   // Setup up jQuery UI dialog for the form.
-  $("#aiocalendar-email-event-form-1").show().dialog({ title: 'Email event', autoOpen: false, height: 615, width: 371, modal: true, zIndex: 10000, resizeable: false });
 }
 
 // This function does two things. First it moves the ical icon from the bottom

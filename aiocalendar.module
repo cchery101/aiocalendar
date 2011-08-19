@@ -10,12 +10,16 @@ function aiocalendar_init() {
   //dpm("boo");
   drupal_add_css(drupal_get_path('module', 'aiocalendar') . "/aiocalendar.css");
   // drupal_add_css(drupal_get_path('module', 'aiocalendar') . "/js/start_ui_theme/ui.all.css");
+  
+  jquery_ui_add(array('ui.dialog'));
+  
+  // CSS coloring for the legend.
   drupal_add_css(file_directory_path() . "/aiocalendar_legend.css");
+  
   drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/aiocalendar.js");
   drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/js/jquery.bt.min.js");
   drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/js/excanvas/excanvas.compiled.js");
   drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/js/hoverintent.js");
-  drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/js/js/jquery-ui-1.6.custom.min.js");
   drupal_add_js("Drupal.settings.aiocalendarPath = '" . drupal_get_path('module', 'aiocalendar') . "';", 'inline');
   
   // Add the email submit form:
@@ -48,6 +52,8 @@ function aiocalendar_views_pre_render (&$view) {
     // $email_event_form = drupal_get_form('aiocalendar_email_event_form');
     // $view->attachment_before = $email_event_form;
     
+    
+    // create a css file to color the diffent catagories of events.
     $calendar_colors = $view->date_info->calendar_colors_taxonomy;
     
     $css = "";
