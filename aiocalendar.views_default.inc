@@ -113,43 +113,6 @@ function aiocalendar_views_default_views() {
       ),
       'relationship' => 'none',
     ),
-    'field_event_image_imceimage_path' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'strip_tags' => 0,
-        'html' => 0,
-      ),
-      'link_to_node' => 0,
-      'label_type' => 'none',
-      'format' => 'default',
-      'multiple' => array(
-        'group' => TRUE,
-        'multiple_number' => '',
-        'multiple_from' => '',
-        'multiple_reversed' => FALSE,
-      ),
-      'exclude' => 0,
-      'id' => 'field_event_image_imceimage_path',
-      'table' => 'node_data_field_event_image',
-      'field' => 'field_event_image_imceimage_path',
-      'override' => array(
-        'button' => 'Override',
-      ),
-      'relationship' => 'none',
-    ),
     'field_event_location_value' => array(
       'label' => 'Location',
       'alter' => array(
@@ -210,6 +173,81 @@ function aiocalendar_views_default_views() {
       'id' => 'body',
       'table' => 'node_revisions',
       'field' => 'body',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'field_image_fid' => array(
+      'label' => 'Image',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'link_to_node' => 0,
+      'label_type' => 'widget',
+      'format' => 'default',
+      'multiple' => array(
+        'group' => TRUE,
+        'multiple_number' => '',
+        'multiple_from' => '',
+        'multiple_reversed' => FALSE,
+      ),
+      'exclude' => 0,
+      'id' => 'field_image_fid',
+      'table' => 'node_data_field_image',
+      'field' => 'field_image_fid',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'field_image_data' => array(
+      'label' => 'Image (field_image) - data',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'link_to_node' => 0,
+      'data_key' => 'description',
+      'exclude' => 0,
+      'id' => 'field_image_data',
+      'table' => 'node_data_field_image',
+      'field' => 'field_image_data',
       'override' => array(
         'button' => 'Override',
       ),
@@ -323,13 +361,7 @@ function aiocalendar_views_default_views() {
     'tid' => array(
       'operator' => 'or',
       'value' => array(
-        '2' => '2',
         '1' => '1',
-        '3' => '3',
-        '4' => '4',
-        '5' => '5',
-        '6' => '6',
-        '7' => '7',
       ),
       'group' => '0',
       'exposed' => TRUE,
@@ -338,10 +370,14 @@ function aiocalendar_views_default_views() {
         'operator' => 'tid_op',
         'identifier' => 'tid',
         'label' => '',
+        'bef_filter_description' => '',
+        'bef_format' => 'bef',
         'optional' => 1,
         'single' => 0,
         'remember' => 1,
         'reduce' => 0,
+        'bef_select_all_none' => 1,
+        'bef_collapsible' => 0,
       ),
       'type' => 'select',
       'limit' => TRUE,
@@ -367,29 +403,39 @@ function aiocalendar_views_default_views() {
   $handler->override_option('cache', array(
     'type' => 'none',
   ));
-  $handler->override_option('title', 'University Calendar');
+  $handler->override_option('title', 'Events');
   $handler->override_option('header_empty', 1);
   $handler->override_option('use_ajax', TRUE);
   $handler->override_option('items_per_page', 0);
   $handler->override_option('use_more', 0);
-  $handler->override_option('style_plugin', 'calendar_nav');
+  $handler->override_option('style_plugin', 'calendar_style');
+  $handler->override_option('style_options', array(
+    'name_size' => 3,
+    'with_weekno' => 0,
+    'max_items' => 0,
+    'max_items_behavior' => 'more',
+    'groupby_times' => 'hour',
+    'groupby_times_custom' => '',
+    'groupby_field' => '',
+  ));
   $handler = $view->new_display('calendar', 'Calendar page', 'calendar_1');
+  $handler->override_option('style_plugin', 'calendar_nav');
   $handler->override_option('style_options', NULL);
   $handler->override_option('row_plugin', '');
   $handler->override_option('row_options', NULL);
-  $handler->override_option('path', 'calendar');
+  $handler->override_option('path', 'events/calendar');
   $handler->override_option('menu', array(
-    'type' => 'none',
-    'title' => 'example',
-    'description' => 'slfj',
+    'type' => 'default tab',
+    'title' => 'Calendar',
+    'description' => 'View our Events in a Calendar',
     'weight' => '0',
     'name' => 'primary-links',
   ));
   $handler->override_option('tab_options', array(
-    'type' => 'none',
-    'title' => '',
-    'description' => '',
-    'weight' => 0,
+    'type' => 'normal',
+    'title' => 'Events',
+    'description' => 'View Our Events',
+    'weight' => '0',
     'name' => 'navigation',
   ));
   $handler->override_option('calendar_colors', array(
@@ -408,7 +454,7 @@ function aiocalendar_views_default_views() {
     '7' => '#677ff4',
   ));
   $handler->override_option('calendar_colors_group', array());
-  $handler->override_option('calendar_popup', '0');
+  $handler->override_option('calendar_popup', '1');
   $handler->override_option('calendar_date_link', 'calendar_event');
   $handler = $view->new_display('calendar_block', 'Calendar block', 'calendar_block_1');
   $handler->override_option('filters', array(
@@ -443,13 +489,13 @@ function aiocalendar_views_default_views() {
       'relationship' => 'none',
     ),
   ));
+  $handler->override_option('style_plugin', 'calendar_nav');
   $handler->override_option('style_options', NULL);
   $handler->override_option('row_plugin', '');
   $handler->override_option('row_options', NULL);
   $handler->override_option('block_description', 'Calendar');
   $handler->override_option('block_caching', -1);
   $handler = $view->new_display('calendar_period', 'Year view', 'calendar_period_1');
-  $handler->override_option('style_plugin', 'calendar_style');
   $handler->override_option('style_options', array(
     'display_type' => 'year',
     'name_size' => 1,
@@ -467,7 +513,6 @@ function aiocalendar_views_default_views() {
   ));
   $handler->override_option('calendar_type', 'year');
   $handler = $view->new_display('calendar_period', 'Month view', 'calendar_period_2');
-  $handler->override_option('style_plugin', 'calendar_style');
   $handler->override_option('style_options', array(
     'name_size' => '99',
     'with_weekno' => '1',
@@ -506,7 +551,6 @@ function aiocalendar_views_default_views() {
   ));
   $handler->override_option('calendar_type', 'day');
   $handler = $view->new_display('calendar_period', 'Week view', 'calendar_period_4');
-  $handler->override_option('style_plugin', 'calendar_style');
   $handler->override_option('style_options', array(
     'name_size' => '99',
     'with_weekno' => 0,
@@ -528,7 +572,6 @@ function aiocalendar_views_default_views() {
   ));
   $handler->override_option('calendar_type', 'week');
   $handler = $view->new_display('calendar_period', 'Block view', 'calendar_period_5');
-  $handler->override_option('style_plugin', 'calendar_style');
   $handler->override_option('style_options', array(
     'display_type' => 'month',
     'name_size' => '1',
@@ -1098,16 +1141,6 @@ function aiocalendar_views_default_views() {
   ));
   $handler->override_option('sitename_title', FALSE);
   $handler = $view->new_display('attachment', 'Attachment', 'attachment_1');
-  $handler->override_option('style_plugin', 'calendar_style');
-  $handler->override_option('style_options', array(
-    'name_size' => 3,
-    'with_weekno' => 0,
-    'max_items' => 0,
-    'max_items_behavior' => 'more',
-    'groupby_times' => 'hour',
-    'groupby_times_custom' => '',
-    'groupby_field' => '',
-  ));
   $handler->override_option('attachment_position', 'before');
   $handler->override_option('inherit_arguments', TRUE);
   $handler->override_option('inherit_exposed_filters', 1);
@@ -1118,6 +1151,26 @@ function aiocalendar_views_default_views() {
     'default' => 0,
     'calendar_block_1' => 0,
     'block_1' => 0,
+  ));
+  $handler = $view->new_display('page', 'Events List', 'page_1');
+  $handler->override_option('style_plugin', 'default');
+  $handler->override_option('style_options', array(
+    'grouping' => '',
+  ));
+  $handler->override_option('path', 'events/list');
+  $handler->override_option('menu', array(
+    'type' => 'tab',
+    'title' => 'Events List',
+    'description' => 'View Our Events in a List',
+    'weight' => '0',
+    'name' => 'navigation',
+  ));
+  $handler->override_option('tab_options', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
   ));
 
   $views[$view->name] = $view;

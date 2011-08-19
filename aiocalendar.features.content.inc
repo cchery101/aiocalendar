@@ -49,7 +49,7 @@ function aiocalendar_content_default_fields() {
     'timezone_db' => 'UTC',
     'tz_handling' => 'site',
     'todate' => 'optional',
-    'repeat' => 1,
+    'repeat' => 0,
     'repeat_collapsed' => '0',
     'default_format' => 'medium',
     'widget' => array(
@@ -57,7 +57,7 @@ function aiocalendar_content_default_fields() {
       'default_value_code' => '',
       'default_value2' => 'blank',
       'default_value_code2' => '',
-      'input_format' => 'm/d/Y - g:i:sa',
+      'input_format' => 'm/d/Y - H:i',
       'input_format_custom' => '',
       'increment' => '1',
       'text_parts' => array(),
@@ -66,7 +66,7 @@ function aiocalendar_content_default_fields() {
       'label' => 'Date',
       'weight' => '-4',
       'description' => '',
-      'type' => 'date_popup_repeat',
+      'type' => 'date_popup',
       'module' => 'date',
     ),
   );

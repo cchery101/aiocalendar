@@ -62,6 +62,12 @@ function aiocalendar_user_default_permissions() {
     ),
   );
 
+  // Exported permission: edit field_image
+  $permissions['edit field_image'] = array(
+    'name' => 'edit field_image',
+    'roles' => array(),
+  );
+
   // Exported permission: edit own calendar_event content
   $permissions['edit own calendar_event content'] = array(
     'name' => 'edit own calendar_event content',
@@ -86,6 +92,12 @@ function aiocalendar_user_default_permissions() {
       '0' => 'anonymous user',
       '1' => 'authenticated user',
     ),
+  );
+
+  // Exported permission: view field_image
+  $permissions['view field_image'] = array(
+    'name' => 'view field_image',
+    'roles' => array(),
   );
 
   return $permissions;
