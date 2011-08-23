@@ -86,7 +86,7 @@ function phptemplate_calendar_ical_icon($url) {
   foreach($tids as $tid) {
     $url .= $tid . "+";
   }
-  
+
   // Clean off extra +
   $url = trim($url, "+");
 
@@ -280,16 +280,49 @@ function phptemplate_feed_icon($url, $title) {
  * Let's add a quick link to the taxonomy selector to add a link to add new terms.
  */
 function aiocalendar_form_alter(&$form, &$form_state, $form_id) {
-  
+
   switch ($form_id) {
     case 'calendar_event_node_form':
       $aiocalendar_event_type_vid = variable_get('aiocalendar_event_type_vid', 0);
-            
+
       $form['taxonomy'][$aiocalendar_event_type_vid]['#description'] = l(t('Add more categories here.'), 'admin/content/taxonomy/'. $aiocalendar_event_type_vid .'/add/term');
-         
+
       break;
-    
+
+  }
+
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function aiocalendar_theme_registry_alter(&$registry) {
+  // Move the theme path so the theme takes precidence over this module theme.
+  array_unshift($registry['node']['theme paths'], drupal_get_path('module', 'aiocalendar') . '/theme');  
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function aiocalendar_preprocess_node(&$variables) {
+  if ($variables['node']->type == 'calendar_event') {    
+    $variables['template_files'][] = 'aiocalendar-event';
   }
   
-  
 }
+
+/**
+ * Implements hook_theme().
+ */
+function aiocalendar_theme($existing, $type, $theme, $path) {
+  return array(
+    'calendar_event' => array(
+      'arguments' => array('node' => NULL, 'teaser' => FALSE, 'page' => FALSE), 
+      'template' => 'aiocalendar-event',
+      'path' => drupal_get_path('module', 'aiocalendar') .'/theme',
+    ),
+  );
+}
+
+
+
