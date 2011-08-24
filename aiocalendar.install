@@ -11,13 +11,23 @@
 function aiocalendar_install() {
 
   $vocabulary = (object) array(
-      'name' => t('Event Type'), 
-      'description' => 'Event Categories for the AIO Calendar', 
+      'name' => st('Event Type'),
+      'description' => 'Event Categories for the AIO Calendar',
       'machine_name' => 'event_type',
       'hierarchy' => 1,
       'module' => 'aiocalendar',
     );
   taxonomy_vocabulary_save($vocabulary);
+  variable_set('aiocalendar_event_type_vid', $vocabulary->vid);
+  
+  // Create a default term so events can be created.
+  $edit = array(
+    'name' => st('General'),
+    'description' => '',
+    'parent' => array(0),
+    'vid' => $vocabulary->vid,
+  );
+  $term = (object) $edit;
+  taxonomy_term_save($term);
 
 }
-

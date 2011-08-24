@@ -11,16 +11,16 @@ function aiocalendar_init() {
   drupal_add_css(drupal_get_path('module', 'aiocalendar') . "/aiocalendar.css");
   // drupal_add_css(drupal_get_path('module', 'aiocalendar') . "/js/start_ui_theme/ui.all.css");
 
-  jquery_ui_add(array('ui.dialog'));
+  // jquery_ui_add(array('ui.dialog'));
 
   // CSS coloring for the legend.
-  drupal_add_css(variable_get('file_public_path', conf_path() . '/files') . "/aiocalendar_legend.css");
-
-  drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/aiocalendar.js");
-  drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/js/jquery.bt.min.js");
-  drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/js/excanvas/excanvas.compiled.js");
-  drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/js/hoverintent.js");
-  drupal_add_js("Drupal.settings.aiocalendarPath = '" . drupal_get_path('module', 'aiocalendar') . "';", 'inline');
+  // drupal_add_css(variable_get('file_public_path', conf_path() . '/files') . "/aiocalendar_legend.css");
+  // 
+  // drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/aiocalendar.js");
+  // drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/js/jquery.bt.min.js");
+  // drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/js/excanvas/excanvas.compiled.js");
+  // drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/js/hoverintent.js");
+  // drupal_add_js("Drupal.settings.aiocalendarPath = '" . drupal_get_path('module', 'aiocalendar') . "';", 'inline');
 
   // Add path to theme to Drupal.settings.themePath
   $theme_path = path_to_theme();
@@ -122,7 +122,7 @@ function phptemplate_feed_icon($url, $title) {
 function aiocalendar_theme_registry_alter(&$registry) {
   // Move the theme path so the theme takes precidence over this module theme.
   // dpm($registry);
-  array_unshift($registry['node']['theme paths'], drupal_get_path('module', 'aiocalendar') . '/theme');  
+  // array_unshift($registry['node']['theme paths'], drupal_get_path('module', 'aiocalendar') . '/theme');  
 }
 
 /**
