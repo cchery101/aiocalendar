@@ -1,21 +1,42 @@
 <?php
+/**
+ * @file
+ * aiocalendar.features.inc
+ */
 
 /**
  * Implementation of hook_ctools_plugin_api().
  */
-// function aiocalendar_ctools_plugin_api() {
-//   list($module, $api) = func_get_args();
-//   if ($module == "strongarm" && $api == "strongarm") {
-//     return array("version" => 1);
-//   }
-// }
-
+function aiocalendar_ctools_plugin_api() {
+  list($module, $api) = func_get_args();
+  if ($module == "strongarm" && $api == "strongarm") {
+    return array("version" => "1");
+  }
+}
 
 /**
  * Implementation of hook_views_api().
  */
-// function aiocalendar_views_api() {
-//   return array(
-//     'api' => '2',
-//   );
-// }
+function aiocalendar_views_api() {
+  list($module, $api) = func_get_args();
+  if ($module == "views" && $api == "views_default") {
+    return array("version" => "3.0");
+  }
+}
+
+/**
+ * Implementation of hook_node_info().
+ */
+function aiocalendar_node_info() {
+  $items = array(
+    'calendar_event' => array(
+      'name' => t('Calendar Event'),
+      'base' => 'node_content',
+      'description' => t('Events to be shown in the All-in-One Calendar'),
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
+  );
+  return $items;
+}
