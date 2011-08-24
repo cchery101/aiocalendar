@@ -97,7 +97,10 @@ function aiocalendar_user_default_permissions() {
   // Exported permission: view field_image
   $permissions['view field_image'] = array(
     'name' => 'view field_image',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'anonymous user',
+      '1' => 'authenticated user',
+    ),
   );
 
   return $permissions;

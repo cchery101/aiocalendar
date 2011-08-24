@@ -88,6 +88,76 @@ function aiocalendar_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'date:calendar_event:full:field_event_date_fromto';
+  $strongarm->value = 'both';
+  $export['date:calendar_event:full:field_event_date_fromto'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'date:calendar_event:full:field_event_date_multiple_from';
+  $strongarm->value = '';
+  $export['date:calendar_event:full:field_event_date_multiple_from'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'date:calendar_event:full:field_event_date_multiple_number';
+  $strongarm->value = '';
+  $export['date:calendar_event:full:field_event_date_multiple_number'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'date:calendar_event:full:field_event_date_multiple_to';
+  $strongarm->value = '';
+  $export['date:calendar_event:full:field_event_date_multiple_to'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'date:calendar_event:full:field_event_date_show_repeat_rule';
+  $strongarm->value = 'show';
+  $export['date:calendar_event:full:field_event_date_show_repeat_rule'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'date:calendar_event:teaser:field_event_date_fromto';
+  $strongarm->value = 'both';
+  $export['date:calendar_event:teaser:field_event_date_fromto'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'date:calendar_event:teaser:field_event_date_multiple_from';
+  $strongarm->value = '';
+  $export['date:calendar_event:teaser:field_event_date_multiple_from'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'date:calendar_event:teaser:field_event_date_multiple_number';
+  $strongarm->value = '';
+  $export['date:calendar_event:teaser:field_event_date_multiple_number'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'date:calendar_event:teaser:field_event_date_multiple_to';
+  $strongarm->value = '';
+  $export['date:calendar_event:teaser:field_event_date_multiple_to'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'date:calendar_event:teaser:field_event_date_show_repeat_rule';
+  $strongarm->value = 'show';
+  $export['date:calendar_event:teaser:field_event_date_show_repeat_rule'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'date_first_day';
   $strongarm->value = '0';
   $export['date_first_day'] = $strongarm;

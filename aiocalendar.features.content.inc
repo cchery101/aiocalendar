@@ -14,14 +14,14 @@ function aiocalendar_content_default_fields() {
       'weight' => '-4',
       'parent' => '',
       'label' => array(
-        'format' => 'above',
+        'format' => 'hidden',
       ),
       'teaser' => array(
-        'format' => 'default',
+        'format' => 'long',
         'exclude' => 0,
       ),
       'full' => array(
-        'format' => 'default',
+        'format' => 'long',
         'exclude' => 0,
       ),
       '4' => array(
@@ -36,7 +36,7 @@ function aiocalendar_content_default_fields() {
     'widget_active' => '1',
     'type' => 'date',
     'required' => '1',
-    'multiple' => '1',
+    'multiple' => '0',
     'module' => 'date',
     'active' => '1',
     'granularity' => array(
@@ -53,13 +53,13 @@ function aiocalendar_content_default_fields() {
     'repeat_collapsed' => '0',
     'default_format' => 'medium',
     'widget' => array(
-      'default_value' => 'blank',
-      'default_value_code' => '',
+      'default_value' => 'strtotime',
+      'default_value_code' => '+1 day',
       'default_value2' => 'blank',
       'default_value_code2' => '',
       'input_format' => 'm/d/Y - H:i',
       'input_format_custom' => '',
-      'increment' => '1',
+      'increment' => '15',
       'text_parts' => array(),
       'year_range' => '-3:+10',
       'label_position' => 'above',
@@ -76,10 +76,10 @@ function aiocalendar_content_default_fields() {
     'field_name' => 'field_event_location',
     'type_name' => 'calendar_event',
     'display_settings' => array(
-      'weight' => 0,
+      'weight' => '-2',
       'parent' => '',
       'label' => array(
-        'format' => 'above',
+        'format' => 'inline',
       ),
       'teaser' => array(
         'format' => 'default',
@@ -131,16 +131,17 @@ function aiocalendar_content_default_fields() {
     'field_name' => 'field_image',
     'type_name' => 'calendar_event',
     'display_settings' => array(
+      'weight' => 0,
+      'parent' => '',
       'label' => array(
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'hidden',
       ),
       'teaser' => array(
-        'format' => 'default',
+        'format' => 'image_nodelink',
         'exclude' => 0,
       ),
       'full' => array(
-        'format' => 'default',
+        'format' => 'image_plain',
         'exclude' => 0,
       ),
       '4' => array(
@@ -173,11 +174,19 @@ function aiocalendar_content_default_fields() {
       'filefield_source_attach_absolute' => '0',
       'filefield_source_attach_mode' => 'move',
       'filefield_source_autocomplete' => '0',
+      'max_resolution' => '0',
+      'min_resolution' => '0',
+      'alt' => '',
+      'custom_alt' => 1,
+      'title' => '',
+      'custom_title' => 0,
+      'title_type' => 'textfield',
+      'use_default_image' => 0,
       'label' => 'Image',
       'weight' => 0,
       'description' => '',
-      'type' => 'filefield_widget',
-      'module' => 'filefield',
+      'type' => 'imagefield_widget',
+      'module' => 'imagefield',
     ),
   );
 
