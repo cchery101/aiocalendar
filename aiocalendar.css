@@ -16,20 +16,18 @@
   height: auto;
 }
 
-#checkall {
-  margin-top: 9px;
+.calendar-calendar td .node-data-field-event-date-field-event-date-value span.date-display-single,
+.calendar-calendar td .node-data-field-event-date-field-event-date-value span.date-display-start,
+.calendar-calendar td .node-data-field-event-date-field-event-date-value span.date-display-end,
+.calendar-calendar td .node-data-field-event-date-field-event-date-value span.date-display-separator {
+  font-weight: normal;
 }
-.view-field view-data-node-data-field-event-date-field-event-date-value {
+
+
+.view-field .view-data-node-data-field-event-date-field-event-date-value {
   display: none;
 }
-/* Hide extra info we're adding for event tool tip display. */
-.date-display-single, .date-display-start, .date-display-separator,
-.date-display-end,
-.view-data-node-data-field-event-image-field-event-location-value,
-.view-data-node-data-field-event-image-field-event-image-imceimage-path,
-.view-data-node-revisions-body {
-  display: none;
-}
+
 
 .event-tooltip-image {
   float: right;

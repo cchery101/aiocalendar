@@ -56,14 +56,14 @@ themeToolTips = function(data) {
   html += "<strong>Time:</strong> " + data.time;
   html += "<br />";
   if (data.location.length > 0) {
-    html += "<strong>Location: </strong>" + data.location;
+    html += "<strong>Location:</strong> " + data.location;
     html += "<br />";  
   }
-  
-  if (data.image != "" || data.paragraph != "<p></p>") {
+
+  if (data.paragraph != "<p></p>") {
     html += "<hr />";
     html += "<div class='event-summary-tooltip clear-block'>";
-    html += $(data.paragraph).prepend(data.image).html();    
+    html += $(data.paragraph).text();    
   }
   
   html += "</div></div>";
@@ -124,13 +124,15 @@ Drupal.behaviors.aio_beautytip = function (context) {
     }
     
     // If summary.
-    data.image = "";
-    // If image.
-    if ($(pieces).find("img").parent().length > 0) {
-      image = jQuery.trim($(pieces).find("img").parent().html());
-      image = $(image).addClass('event-tooltip-image').parent().html();
-      data.image = image;
-    }
+    // data.image = "";
+    // // If image.
+    // if ($(pieces).find("img").parent().length > 0) {
+    //   image = jQuery.trim($(pieces).find("img").parent().html());
+    //   image = $(image).addClass('event-tooltip-image').parent().html();
+    //   data.image = image;
+    // }
+    
+    // console.log(jQuery.trim($(pieces).find('p').parent().html()));
     
     if ($(pieces).find("p").length > 0) {
       paragraph = jQuery.trim($(pieces).find("p").parent().html());  
@@ -140,7 +142,7 @@ Drupal.behaviors.aio_beautytip = function (context) {
     if (typeof data.paragraph == 'undefined') {
       data.paragraph = "<p></p>";
     }
-  
+
     return themeToolTips(data);
   }
   
@@ -155,101 +157,98 @@ Drupal.behaviors.aio_beautytip = function (context) {
     // Reset click events for all the calendars.
     setBeautyTipClickEvent();
   }
-  
-  getContentShare = function (datebox) {
-    html = "";
-    
-    // Grab the ical feed url and add the node id at the end as an argument.
-    ical_feed = $(".ical-icon").attr('href');
-    id = $(datebox).attr("id");
-    var match = /calendar:([0-9]*):/i.exec(id);
-    id = match[1];
-    ical_feed = ical_feed + "/" + id;
-    
-    // Set values on the Drupal object for later.
-    aiocalendar = new Object;
-    aiocalendar.nid = id;
-    aiocalendar.ical_feed = ical_feed;
-    Drupal.settings.aiocalendar = aiocalendar;
-    
-    imagepath = Drupal.settings.basePath + Drupal.settings.aiocalendarPath + "/images/";
-    
-    closeImg = imagepath + "close.png";
-    emailImg = "<img width='48' height='48' class='tooltip-image' alt='Email event' src='" + imagepath + "email.png'>";
-    saveImg = "<img width='48' height='48' class='tooltip-image' alt='Save event' src='" + imagepath + "save-ical.png'>";
-    html += '<a href="javascript:void(closeResetToolTips());"> ';
-    html += '<img width="22" height="22" class="tooltip-close" alt="close" src="' + closeImg + '"/></a>'; 
-    html += getContent(datebox);
-    html += "<div class='tooltip-action'><div class='tooltip-icon email-event'>" + emailImg + "<span class='tooltip-text'>Email event</span> </div>";
-    html += "<a href='" + ical_feed + "' class='tooltip-icon save-event'>" + saveImg + " <span class='tooltip-text'>Save event</span></div></a>";
-    
-    return html;
-  }
-  
+
   setBeautyTips = function() {
     $(".inner .calendar:has('.stripe')").bt({
       contentSelector: "getContent(this)",
-      fill: 'rgba(222, 240, 252, .85)',
-      cssStyles: {color: 'black', fontWeight: 'bold'},
-      shrinkToFit: true,
-      padding: 20,
-      hoverIntentOpts: {
-        interval: 150
+      positions: ['right', 'left'],
+      fill: '#F4F4F4',
+      strokeStyle: '#666666',
+      spikeLength: 20,
+      spikeGirth: 10,
+      width: 300,
+      overlap: 0,
+      centerPointY: 1,
+      cornerRadius: 0,
+      cssStyles: {
+        fontFamily: '"Lucida Grande",Helvetica,Arial,Verdana,sans-serif',
+        fontSize: '12px',
+        padding: '10px 14px'
       },
-      cornerRadius: 20,
-      spikeLength: 15,
-      spikeGirth: 25,
-      width: 500,
-      positions: ['left', 'right', 'bottom', 'top']
+      shadow: true,
+      shadowColor: 'rgba(0,0,0,.5)',
+      shadowBlur: 8,
+      shadowOffsetX: 4,
+      shadowOffsetY: 4
     });
   }
   
-  btOnClick = function (dateBox) {
-    closeResetToolTips();
-    
-    $(this).bt({
-        contentSelector: "getContentShare(this)",
-        fill: 'rgba(222, 240, 252, .85)',
-        cssStyles: {color: 'black', fontWeight: 'bold'},
-        shrinkToFit: true,
-        trigger: ['mouseover', 'click'],
-        padding: 20,
-        clickAnywhereToClose: false,
-        cornerRadius: 20,
-        spikeLength: 15,
-        spikeGirth: 25,
-        width: 500,
-        positions: ['left', 'right', 'bottom', 'top']
-      });
-    $(this).btOn();
-    $(this).unbind('mouseout');
-    // Set click event on email event
-    $(".email-event").click(addTextBoxForEmails);
-    unbindAllExceptActive();
-    
-    return false;
-  }
+  // btOnClick = function (dateBox) {
+  //   closeResetToolTips();
+  //   
+  //   $(this).bt({
+  //       contentSelector: "$('#hulu-content')",
+  //       positions: ['right', 'left'],
+  //       fill: '#F4F4F4',
+  //       strokeStyle: '#666666', 
+  //       spikeLength: 20,
+  //       spikeGirth: 10,
+  //       width: 350,
+  //       overlap: 0,
+  //       centerPointY: 1,
+  //       cornerRadius: 0, 
+  //       cssStyles: {
+  //         fontFamily: '"Lucida Grande",Helvetica,Arial,Verdana,sans-serif', 
+  //         fontSize: '12px',
+  //         padding: '10px 14px'
+  //       },
+  //       shadow: true,
+  //       shadowColor: 'rgba(0,0,0,.5)',
+  //       shadowBlur: 8,
+  //       shadowOffsetX: 4,
+  //       shadowOffsetY: 4
+  //       contentSelector: "getContentShare(this)",
+  //       //         fill: 'rgba(222, 240, 252, .85)',
+  //       //         cssStyles: {color: 'black', fontWeight: 'bold'},
+  //       //         shrinkToFit: true,
+  //       //         trigger: ['mouseover', 'click'],
+  //       //         padding: 20,
+  //       //         clickAnywhereToClose: false,
+  //       //         cornerRadius: 20,
+  //       //         spikeLength: 15,
+  //       //         spikeGirth: 25,
+  //       //         width: 500,
+  //       //         positions: ['left', 'right', 'bottom', 'top']
+  //     });
+  //   $(this).btOn();
+  //   $(this).unbind('mouseout');
+  //   // Set click event on email event
+  //   $(".email-event").click(addTextBoxForEmails);
+  //   unbindAllExceptActive();
+  //   
+  //   return false;
+  // }
   
-  addTextBoxForEmails = function() {
-    // Change hidden values for the event Node ID and the active categories.
-    $("#edit-nid-1").attr('value', Drupal.settings.aiocalendar.nid);
-    $("#edit-ical-feed-url-1").attr('value', Drupal.settings.aiocalendar.ical_feed);
-    $("#aiocalendar-email-event-form-1").dialog('open');
-  }
-  // Unbind all except active
-  unbindAllExceptActive = function () {
-    $(".inner .calendar:has('.stripe'):not('.bt-active')").unbind().bind("click", this, btOnClick);
-  }
-  
-  setBeautyTipClickEvent = function() {
-    $(".inner .calendar:has('.stripe')").bind("click", this, btOnClick);  
-  }
+  // addTextBoxForEmails = function() {
+  //    // Change hidden values for the event Node ID and the active categories.
+  //    $("#edit-nid-1").attr('value', Drupal.settings.aiocalendar.nid);
+  //    $("#edit-ical-feed-url-1").attr('value', Drupal.settings.aiocalendar.ical_feed);
+  //    $("#aiocalendar-email-event-form-1").dialog('open');
+  //  }
+  //  // Unbind all except active
+  //  unbindAllExceptActive = function () {
+  //    $(".inner .calendar:has('.stripe'):not('.bt-active')").unbind().bind("click", this, btOnClick);
+  //  }
+  //  
+  //  setBeautyTipClickEvent = function() {
+  //    $(".inner .calendar:has('.stripe')").bind("click", this, btOnClick);  
+  //  }
   
   // Set beautytips.
   setBeautyTips();
   
   // Set click events for all the calendars.
-  setBeautyTipClickEvent();
+  // setBeautyTipClickEvent();
   
   // Setup up jQuery UI dialog for the form.
 }
@@ -272,3 +271,19 @@ Drupal.behaviors.moveIcalIcon = function (context) {
     $("a.feed-icon").attr('href', rss_feed);
   }
 }
+
+// Hide the long descriptions on the calendar
+Drupal.behaviors.truncateLongDesc = function () {
+  
+}
+
+
+
+if (Drupal.jsEnabled) {
+  $(document).ready(function(){
+    // Hide the description as soon as it loads
+    $('.view-field.view-data-node-revisions-body.node-revisions-body').hide();
+  });
+}
+
+
