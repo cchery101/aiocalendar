@@ -3,7 +3,7 @@
 include_once('aiocalendar.features.inc');
 
 /*
- * Implementation of hook_init().
+ * Implements hook_init().
  */
 function aiocalendar_init() {
   //dpm(realpath(drupal_get_path('module', 'phpmailer') . '/phpmailer/class.phpmailer.php'));
@@ -15,7 +15,7 @@ function aiocalendar_init() {
 
   // CSS coloring for the legend.
   // drupal_add_css(variable_get('file_public_path', conf_path() . '/files') . "/aiocalendar_legend.css");
-  // 
+  //
   // drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/aiocalendar.js");
   // drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/js/jquery.bt.min.js");
   // drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/js/excanvas/excanvas.compiled.js");
@@ -28,10 +28,10 @@ function aiocalendar_init() {
 }
 
 /*
- * Implementation of hook_views_pre_render().
+ * Implements hook_views_pre_render().
  * Generate CSS to color border above checkboxes and add email event form.
  */
-function aiocalendar_views_pre_render (&$view) {
+function aiocalendar_views_pre_render(&$view) {
   $calendar_colors = array();
   if ($view->name == "events_calendar"
       && isset($view->date_info->calendar_colors_taxonomy)) {
@@ -51,8 +51,7 @@ function aiocalendar_views_pre_render (&$view) {
       $css .= "}";
     }
     if (!empty($css)) {
-      file_save_data($css, file_directory_path() . "/aiocalendar_legend.css",
-                     FILE_EXISTS_REPLACE);
+      file_save_data($css, file_directory_path() . "/aiocalendar_legend.css", FILE_EXISTS_REPLACE);
     }
   }
 }
@@ -71,21 +70,21 @@ function phptemplate_calendar_ical_icon($url) {
   // Views arguments treat a "+" between arguments as OR.
   // So we're crafting an argument that asks for all events which match one of the
   // term IDs.
-  foreach($tids as $tid) {
+  foreach ($tids as $tid) {
     $url .= $tid . "+";
   }
 
   // Clean off extra +
   $url = trim($url, "+");
 
-  if ($image = theme('image', drupal_get_path('module', 'aiocalendar') .'/images/ical.png', t('Add to calendar'), t('Add to calendar'))) {
-    return '<div style="text-align:r  ight"><a href="'. check_url($url) .'" class="ical-icon" title="ical">'. $image .'</a></div>';
+  if ($image = theme('image', drupal_get_path('module', 'aiocalendar') . '/images/ical.png', t('Add to calendar'), t('Add to calendar'))) {
+    return '<div style="text-align:right"><a href="' . check_url($url) . '" class="ical-icon" title="ical">' . $image . '</a></div>';
   }
 }
 
 /**
  * Override theme_feed_icon() so we can override the url produced.
- * 
+ *
  * Return code that emits an feed icon.
  *
  * @param $url
@@ -104,15 +103,15 @@ function phptemplate_feed_icon($url, $title) {
   // Views arguments treat a "+" between arguments as OR.
   // So we're crafting an argument that asks for all events which match one of the
   // term IDs.
-  foreach($tids as $tid) {
+  foreach ($tids as $tid) {
     $url .= $tid . "+";
   }
-  
+
   // Clean off extra +
   $url = trim($url, "+");
-  
-  if ($image = theme('image', drupal_get_path('module', 'aiocalendar') .'/images/feed-icon.png', t('Syndicate content'), 'RSS')) {
-    return '<a href="'. check_url($url) .'" class="feed-icon">'. $image .'</a>';
+
+  if ($image = theme('image', drupal_get_path('module', 'aiocalendar') . '/images/feed-icon.png', t('Syndicate content'), 'RSS')) {
+    return '<a href="' . check_url($url) . '" class="feed-icon">' . $image . '</a>';
   }
 }
 
@@ -122,17 +121,16 @@ function phptemplate_feed_icon($url, $title) {
 function aiocalendar_theme_registry_alter(&$registry) {
   // Move the theme path so the theme takes precidence over this module theme.
   // dpm($registry);
-  // array_unshift($registry['node']['theme paths'], drupal_get_path('module', 'aiocalendar') . '/theme');  
+  // array_unshift($registry['node']['theme paths'], drupal_get_path('module', 'aiocalendar') . '/theme');
 }
 
 /**
  * Implements hook_preprocess_node().
  */
 function aiocalendar_preprocess_node(&$variables) {
-  if ($variables['node']->type == 'calendar_event') {    
+  if ($variables['node']->type == 'calendar_event') {
     $variables['template_files'][] = 'aiocalendar-event';
   }
-  
 }
 
 /**
@@ -141,9 +139,9 @@ function aiocalendar_preprocess_node(&$variables) {
 function aiocalendar_theme($existing, $type, $theme, $path) {
   return array(
     'calendar_event' => array(
-      'arguments' => array('node' => NULL, 'teaser' => FALSE, 'page' => FALSE), 
+      'arguments' => array('node' => NULL, 'teaser' => FALSE, 'page' => FALSE),
       'template' => 'aiocalendar-event',
-      'path' => drupal_get_path('module', 'aiocalendar') .'/theme',
+      'path' => drupal_get_path('module', 'aiocalendar') . '/theme',
     ),
   );
 }
