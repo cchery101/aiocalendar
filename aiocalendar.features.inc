@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * Extra features stuff.
+ */
 
 /**
  * Implementation of hook_ctools_plugin_api().

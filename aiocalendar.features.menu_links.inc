@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * @file
+ * Menu stuff for this feature.
+ */
+
+
+/**
  * Implementation of hook_menu_default_menu_links().
  */
 function aiocalendar_menu_default_menu_links() {

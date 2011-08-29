@@ -2,7 +2,6 @@
 
 /**
  * @file node.tpl.php
- *
  * Theme implementation to display a node.
  *
  * Available variables:

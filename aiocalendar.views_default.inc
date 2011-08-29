@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * The default views.
+ */
+
+/**
  * Implementation of hook_views_default_views().
  */
 function aiocalendar_views_default_views() {

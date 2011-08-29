@@ -24,10 +24,9 @@ function aiocalendar_install() {
       'calendar_event' => 1,
     ),
   );
-  
+
   taxonomy_save_vocabulary($vocab);
-  
+
   variable_set('aiocalendar_event_type_vid', $vocab->vid);
-  
 }
 
