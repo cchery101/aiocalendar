@@ -6,19 +6,13 @@ include_once('aiocalendar.features.inc');
  * Implements hook_init().
  */
 function aiocalendar_init() {
-  //dpm(realpath(drupal_get_path('module', 'phpmailer') . '/phpmailer/class.phpmailer.php'));
-  //dpm("boo");
-  drupal_add_css(drupal_get_path('module', 'aiocalendar') . "/aiocalendar.css");
-  // drupal_add_css(drupal_get_path('module', 'aiocalendar') . "/js/start_ui_theme/ui.all.css");
 
-  // jquery_ui_add(array('ui.dialog'));
+  drupal_add_css(drupal_get_path('module', 'aiocalendar') . "/aiocalendar.css");
 
   // CSS coloring for the legend.
   // drupal_add_css(variable_get('file_public_path', conf_path() . '/files') . "/aiocalendar_legend.css");
   //
   // drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/aiocalendar.js");
-  // drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/js/jquery.bt.min.js");
-  // drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/js/excanvas/excanvas.compiled.js");
   // drupal_add_js(drupal_get_path('module', 'aiocalendar') . "/js/hoverintent.js");
   // drupal_add_js("Drupal.settings.aiocalendarPath = '" . drupal_get_path('module', 'aiocalendar') . "';", 'inline');
 
@@ -68,25 +62,8 @@ function aiocalendar_views_pre_render(&$view) {
  */
 function aiocalendar_views_post_render(&$view, &$output, &$cache) {
   // dpm($view);
-  // dpm($output);
-  // dpm($cache);
-  // 
-  
-  // str_replace();
-  
-  // foreach ($view->style_plugin->items as $item) {
-  //   foreach ($item as $event) {
-  //     foreach ($event as $value) {
-  //       $new_date_id = str_replace('.', '_', $value->date_id);
-  //       dpm($new_date_id);
-  // 
-  //     }
-  //   }
-  // }
-  
   
   foreach ($view->result as $value) {
-    // dpm($key);
     // dpm($value);
     
     $event_tip ='<div class="tooltip-event">
@@ -113,13 +90,7 @@ function aiocalendar_views_post_render(&$view, &$output, &$cache) {
     );
 
   }
-
-  
-  
-  
-  // dpm($options);
   beautytips_add_beautytips($options);
-  
 
 }
 
