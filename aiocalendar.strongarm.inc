@@ -1,11 +1,6 @@
 <?php
 
 /**
- * @file
- * The strong arm variables.
- */
-
-/**
  * Implementation of hook_strongarm().
  */
 function aiocalendar_strongarm() {

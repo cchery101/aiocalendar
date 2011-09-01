@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * The content type declaration.
- */
 
 /**
  * Implementation of hook_content_default_fields().

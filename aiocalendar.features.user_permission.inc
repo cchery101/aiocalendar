@@ -1,12 +1,6 @@
 <?php
 
 /**
- * @file
- * User permissions items.
- */
-
-
-/**
  * Implementation of hook_user_default_permissions().
  */
 function aiocalendar_user_default_permissions() {

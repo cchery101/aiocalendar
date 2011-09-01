@@ -1,12 +1,6 @@
 <?php
 
 /**
- * @file
- * Menu stuff for this feature.
- */
-
-
-/**
  * Implementation of hook_menu_default_menu_links().
  */
 function aiocalendar_menu_default_menu_links() {
@@ -20,7 +14,7 @@ function aiocalendar_menu_default_menu_links() {
     'link_title' => 'Events',
     'options' => array(
       'attributes' => array(
-        'title' => 'View Our Events',
+        'title' => 'View our upcoming events.',
       ),
     ),
     'module' => 'system',

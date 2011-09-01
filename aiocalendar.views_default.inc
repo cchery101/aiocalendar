@@ -1,11 +1,6 @@
 <?php
 
 /**
- * @file
- * The default views.
- */
-
-/**
  * Implementation of hook_views_default_views().
  */
 function aiocalendar_views_default_views() {
@@ -223,6 +218,50 @@ function aiocalendar_views_default_views() {
       'validate_argument_transform' => 0,
       'validate_user_restrict_roles' => 0,
     ),
+    'tid' => array(
+      'default_action' => 'ignore',
+      'style_plugin' => 'default_summary',
+      'style_options' => array(),
+      'wildcard' => 'all',
+      'wildcard_substitution' => 'All',
+      'title' => '',
+      'breadcrumb' => '',
+      'default_argument_type' => 'fixed',
+      'default_argument' => '',
+      'validate_type' => 'taxonomy_term',
+      'validate_fail' => 'not found',
+      'break_phrase' => 0,
+      'add_table' => 1,
+      'require_value' => 0,
+      'reduce_duplicates' => 0,
+      'set_breadcrumb' => 0,
+      'id' => 'tid',
+      'table' => 'term_node',
+      'field' => 'tid',
+      'validate_user_argument_type' => 'uid',
+      'validate_user_roles' => array(
+        '2' => 0,
+      ),
+      'relationship' => 'none',
+      'default_options_div_prefix' => '',
+      'default_argument_fixed' => '',
+      'default_argument_user' => 0,
+      'default_argument_php' => '',
+      'validate_argument_node_type' => array(
+        'calendar_event' => 0,
+        'page' => 0,
+        'story' => 0,
+      ),
+      'validate_argument_node_access' => 0,
+      'validate_argument_nid_type' => 'nid',
+      'validate_argument_vocabulary' => array(
+        '1' => 1,
+      ),
+      'validate_argument_type' => 'tid',
+      'validate_argument_transform' => 0,
+      'validate_user_restrict_roles' => 0,
+      'validate_argument_php' => '',
+    ),
   ));
   $handler->override_option('filters', array(
     'status' => array(
@@ -322,10 +361,10 @@ function aiocalendar_views_default_views() {
   $handler->override_option('row_options', NULL);
   $handler->override_option('path', 'events/calendar');
   $handler->override_option('menu', array(
-    'type' => 'default tab',
+    'type' => 'tab',
     'title' => 'Calendar',
     'description' => 'View our Events in a Calendar',
-    'weight' => '0',
+    'weight' => '5',
     'name' => 'primary-links',
   ));
   $handler->override_option('tab_options', array(
@@ -1054,126 +1093,28 @@ function aiocalendar_views_default_views() {
   $handler->override_option('style_options', array(
     'grouping' => '',
   ));
+  $handler->override_option('row_plugin', 'node');
+  $handler->override_option('row_options', array(
+    'relationship' => 'none',
+    'build_mode' => 'teaser',
+    'links' => 1,
+    'comments' => 0,
+  ));
   $handler->override_option('path', 'events/list');
   $handler->override_option('menu', array(
-    'type' => 'tab',
+    'type' => 'default tab',
     'title' => 'Events List',
     'description' => 'View Our Events in a List',
     'weight' => '0',
     'name' => 'navigation',
   ));
   $handler->override_option('tab_options', array(
-    'type' => 'none',
-    'title' => '',
-    'description' => '',
-    'weight' => 0,
+    'type' => 'normal',
+    'title' => 'Events',
+    'description' => 'View our upcoming events.',
+    'weight' => '0',
     'name' => 'navigation',
   ));
-  $handler = $view->new_display('block', 'Events List Block', 'block_2');
-  $handler->override_option('fields', array(
-    'title' => array(
-      'label' => '',
-      'link_to_node' => 1,
-      'exclude' => 0,
-      'id' => 'title',
-      'field' => 'title',
-      'table' => 'node',
-      'relationship' => 'none',
-    ),
-    'field_event_date_value' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'strip_tags' => 0,
-        'html' => 0,
-      ),
-      'link_to_node' => 0,
-      'label_type' => 'none',
-      'format' => 'default',
-      'multiple' => array(
-        'multiple_number' => '',
-        'multiple_from' => '',
-        'multiple_to' => '',
-        'group' => 0,
-      ),
-      'repeat' => array(
-        'show_repeat_rule' => 'show',
-      ),
-      'fromto' => array(
-        'fromto' => 'both',
-      ),
-      'exclude' => 1,
-      'id' => 'field_event_date_value',
-      'table' => 'node_data_field_event_date',
-      'field' => 'field_event_date_value',
-      'relationship' => 'none',
-      'override' => array(
-        'button' => 'Override',
-      ),
-    ),
-    'field_event_date_value_1' => array(
-      'label' => '',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'strip_tags' => 0,
-        'html' => 0,
-      ),
-      'link_to_node' => 0,
-      'label_type' => 'custom',
-      'format' => 'short',
-      'multiple' => array(
-        'multiple_number' => '',
-        'multiple_from' => '',
-        'multiple_to' => '',
-        'group' => 0,
-      ),
-      'repeat' => array(
-        'show_repeat_rule' => 'hide',
-      ),
-      'fromto' => array(
-        'fromto' => 'both',
-      ),
-      'exclude' => 0,
-      'id' => 'field_event_date_value_1',
-      'table' => 'node_data_field_event_date',
-      'field' => 'field_event_date_value',
-      'override' => array(
-        'button' => 'Override',
-      ),
-      'relationship' => 'none',
-    ),
-  ));
-  $handler->override_option('style_plugin', 'list');
-  $handler->override_option('style_options', array(
-    'grouping' => '',
-    'type' => 'ul',
-  ));
-  $handler->override_option('block_description', '');
-  $handler->override_option('block_caching', -1);
 
   $views[$view->name] = $view;
 
