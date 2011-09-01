@@ -4,16 +4,18 @@
   padding-right: 5px;
 }
 
-.view-dom-id-1 .month-view td {
-  height: 150px;
-}
-
 .view-dom-id-1 .year-view .month-view td {
   height: auto;
 }
 
 .calendar-calendar table.mini td {
   height: auto;
+}
+
+
+/* Hide the year/month/week/day links */
+ul.calendar-links {
+  display:none;
 }
 
 .calendar-calendar td .node-data-field-event-date-field-event-date-value span.date-display-single,
@@ -116,3 +118,16 @@
   width:100px;
   height:34px;
 }
+
+div.bef-checkboxes .form-item {
+  float:left;
+  display:inline;
+  margin-right: 10px;
+}
+
+/* Making the BeautyTip Show up */
+.calendar-calendar .month-view .full td.single-day div.monthview, .calendar-calendar .week-view .full td.single-day div.weekview, .calendar-calendar .day-view .full td.single-day div.dayview {
+  overflow:visible;
+  
+}
+

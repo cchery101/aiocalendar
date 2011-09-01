@@ -32,6 +32,8 @@ function aiocalendar_init() {
  * Generate CSS to color border above checkboxes and add email event form.
  */
 function aiocalendar_views_pre_render(&$view) {
+  
+  // dpm($view);
   $calendar_colors = array();
   if ($view->name == "events_calendar"
       && isset($view->date_info->calendar_colors_taxonomy)) {
@@ -54,73 +56,86 @@ function aiocalendar_views_pre_render(&$view) {
       file_save_data($css, file_directory_path() . "/aiocalendar_legend.css", FILE_EXISTS_REPLACE);
     }
   }
-}
+  
+  
 
-/*
- * Override theme_calendar_ical_icon() so we can override the url produced.
- */
-function phptemplate_calendar_ical_icon($url) {
-  $search = preg_match_all("/tid\[([0-9])*\]/", $url, $matches);
-  $tids = $matches[1];
-
-  $search = preg_match("/(.*ical\/)20[0-9]{2}.*/", $url, $url_stem);
-
-  $url = $url_stem[1];
-
-  // Views arguments treat a "+" between arguments as OR.
-  // So we're crafting an argument that asks for all events which match one of the
-  // term IDs.
-  foreach ($tids as $tid) {
-    $url .= $tid . "+";
-  }
-
-  // Clean off extra +
-  $url = trim($url, "+");
-
-  if ($image = theme('image', drupal_get_path('module', 'aiocalendar') . '/images/ical.png', t('Add to calendar'), t('Add to calendar'))) {
-    return '<div style="text-align:right"><a href="' . check_url($url) . '" class="ical-icon" title="ical">' . $image . '</a></div>';
-  }
+  
 }
 
 /**
- * Override theme_feed_icon() so we can override the url produced.
+ * Post process any rendered data.
  *
- * Return code that emits an feed icon.
- *
- * @param $url
- *   The url of the feed.
- * @param $title
- *   A descriptive title of the feed.
-  */
-function phptemplate_feed_icon($url, $title) {
-  $search = preg_match_all("/tid\[([0-9])*\]/", $url, $matches);
-  $tids = $matches[1];
+ */
+function aiocalendar_views_post_render(&$view, &$output, &$cache) {
+  // dpm($view);
+  // dpm($output);
+  // dpm($cache);
+  // 
+  
+  // str_replace();
+  
+  // foreach ($view->style_plugin->items as $item) {
+  //   foreach ($item as $event) {
+  //     foreach ($event as $value) {
+  //       $new_date_id = str_replace('.', '_', $value->date_id);
+  //       dpm($new_date_id);
+  // 
+  //     }
+  //   }
+  // }
+  
+  
+  foreach ($view->result as $value) {
+    // dpm($key);
+    // dpm($value);
+    
+    $event_tip ='<div class="tooltip-event">
+      <h2>' . $value->node_title . '</h2>
+      <div class="event-time">
+        <strong>Time:</strong> ' . $value->field_field_date[0]['rendered']['#markup'] . '
+      </div>
+      <div class="event-location">
+        <strong>Location:</strong> ' . $value->field_field_event_location[0]['rendered']['#markup'] . '
+      </div>
+      <div class="event-description">
+        ' . $value->field_body[0]['rendered']['#markup'] . '
+      </div>
+    </div>';
 
-  $search = preg_match("/(.*rss\/)20[0-9]{2}-.*/", $url, $url_stem);
+    $options['bt_events_calendar' . $value->nid] = array(
+      'cssSelect' => '.calendar\\.' . $value->nid . '\\.field_date\\.0\\.0',
+      // 'cssSelect' => '.view-item-events_calendar',
+      'text' => $event_tip,
 
-  $url = $url_stem[1];
+      'trigger' => array('mouseover', 'click'),
+      'width' => 300,
+      'height' => 200,
+    );
 
-  // Views arguments treat a "+" between arguments as OR.
-  // So we're crafting an argument that asks for all events which match one of the
-  // term IDs.
-  foreach ($tids as $tid) {
-    $url .= $tid . "+";
   }
 
-  // Clean off extra +
-  $url = trim($url, "+");
+  
+  
+  
+  // dpm($options);
+  beautytips_add_beautytips($options);
+  
 
-  if ($image = theme('image', drupal_get_path('module', 'aiocalendar') . '/images/feed-icon.png', t('Syndicate content'), 'RSS')) {
-    return '<a href="' . check_url($url) . '" class="feed-icon">' . $image . '</a>';
-  }
 }
+
 
 /**
  * Implements hook_theme_registry_alter().
  */
-function aiocalendar_theme_registry_alter(&$registry) {
+function aiocalendar_theme_registry_alter(&$theme_registry) {
   // Move the theme path so the theme takes precidence over this module theme.
-  // dpm($registry);
+  
+  // $theme_registry['calendar_ical_icon']['theme path'] = drupal_get_path('module', 'aiocalendar');
+  // $theme_registry['calendar_ical_icon']['preprocess functions'][] = 'aio_preprocess_calendar_ical_icon';
+  // 
+  // 
+  // dpm($theme_registry['calendar_ical_icon']);
+  
   // array_unshift($registry['node']['theme paths'], drupal_get_path('module', 'aiocalendar') . '/theme');
 }
 
@@ -145,6 +160,4 @@ function aiocalendar_theme($existing, $type, $theme, $path) {
     ),
   );
 }
-
-
 
