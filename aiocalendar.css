@@ -116,3 +116,14 @@
   width:100px;
   height:34px;
 }
+
+.bef-checkboxes .form-item{
+  float: left;
+  margin-right:10px !important;
+}
+
+/* Fixing view hover */
+.views-admin-links.views-hide{
+  width: 200px;
+}
+
