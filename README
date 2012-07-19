@@ -3,6 +3,14 @@ The All-In-One Calendar is a an all inclusive calendar feature that can be easil
 AIOcalendar requires the [Features module](http://drupal.org/project/features) from [Drupal.org](http://drupal.org).
 
 
+Installation: 
+
+1: Download AIOCalendar
+2: Download dependancies:
+drush dl beautytips better_exposed_filters calendar calendar_ical date date_popup features filefield_sources image menu strongarm taxonomy views 
+3: Enable AIO Calendar: 
+
+
 ### Credit:
 Originally created by [Kyle Matthews](http://kyle.mathews2000.com/) sponsored by Brigham Young University
 
