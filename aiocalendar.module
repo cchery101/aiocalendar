@@ -61,37 +61,66 @@ function aiocalendar_views_pre_render(&$view) {
  *
  */
 function aiocalendar_views_post_render(&$view, &$output, &$cache) {
-  // dpm($view);
-  
-  foreach ($view->result as $value) {
-    // dpm($value);
-    
-    $event_tip ='<div class="tooltip-event">
-      <h2>' . $value->node_title . '</h2>
-      <div class="event-time">
-        <strong>Time:</strong> ' . $value->field_field_date[0]['rendered']['#markup'] . '
-      </div>
-      <div class="event-location">
-        <strong>Location:</strong> ' . $value->field_field_event_location[0]['rendered']['#markup'] . '
-      </div>
-      <div class="event-description">
-        ' . $value->field_body[0]['rendered']['#markup'] . '
-      </div>
-    </div>';
+  if (!empty($view->result)) {
+    drupal_add_js(drupal_get_path('module', 'aiocalendar') . '/js/jquery.qtip.min.js');
 
-    $options['bt_events_calendar' . $value->nid] = array(
-      'cssSelect' => '.calendar\\.' . $value->nid . '\\.field_date\\.0\\.0',
-      // 'cssSelect' => '.view-item-events_calendar',
-      'text' => $event_tip,
+    $inline = "(function($) {alert('hey');
+      $(document).ready(function() {";
 
-      'trigger' => array('mouseover', 'click'),
-      'width' => 300,
-      'height' => 200,
-    );
+    foreach ($view->result as $value) {
+      // dpm($value);
+      $output .='<div id="calendar.' . $value->nid . '.field_date.0.0-content"><div class="tooltip-event">
+        <h2>' . $value->node_title . '</h2>
+        <div class="event-time">
+          <strong>Time:</strong> ' . $value->field_field_date[0]['rendered']['#markup'] . '
+        </div>
+        <div class="event-location">
+          <strong>Location:</strong> ' . $value->field_field_event_location[0]['rendered']['#markup'] . '
+        </div>
+        <div class="event-description">
+          ' . truncate_utf8($value->field_body[0]['rendered']['#markup'] , 150, TRUE, TRUE, 10) . '
+        </div>
+      </div></div>';
 
+      $inline .= "\n" . '$(".calendar\\\.' . $value->nid . '\\\.field_date\\\.0\\\.0").qtip({
+        content: {
+          text: $(\'#calendar\\\.' . $value->nid . '\\\.field_date\\\.0\\\.0-content\')
+        },
+        show: {
+          solo: true
+        },
+        hide: {
+          fixed: true
+        },
+        position: {
+          corner: {
+            target: "leftMiddle",
+            tooltip: "rightTop"
+          }
+        },
+        style: {
+          tip: "rightTop"
+        }
+      });';
+      $inline .= 'console.log($(".calendar\.' . $value->nid . '\.field_date\.0\.0"));';
+      // dpm($inline);
+      // $options['bt_events_calendar' . $value->nid] = array(
+      //   'cssSelect' => '.calendar\\.' . $value->nid . '\\.field_date\\.0\\.0',
+      //   // 'cssSelect' => '.view-item-events_calendar',
+      //   'text' => $event_tip,
+      // 
+      //   'trigger' => array('mouseover', 'click'),
+      //   'width' => 300,
+      //   'height' => 200,
+      // );
+
+    }
+    $inline .= "});
+  })(jQuery);";
+    drupal_add_js($inline, 'inline');
+    // beautytips_add_beautytips($options);
   }
-  beautytips_add_beautytips($options);
-
+  
 }
 
 
