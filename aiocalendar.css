@@ -135,3 +135,14 @@ div.bef-checkboxes .form-item {
   text-align: left;
 }
 
+
+.block .date-heading h3{
+  background: #DFDFDF;
+  border-radius: 5px;
+}
+
+.view-events-calendar .view-filters{
+
+  background-color: #DFDFDF;
+  padding: 0 .5em .25em;
+}

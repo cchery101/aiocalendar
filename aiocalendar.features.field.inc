@@ -5,12 +5,12 @@
  */
 
 /**
- * Implementation of hook_field_default_fields().
+ * Implements hook_field_default_fields().
  */
 function aiocalendar_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'node-calendar_event-body'
+  // Exported field: 'node-calendar_event-body'.
   $fields['node-calendar_event-body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -33,6 +33,7 @@ function aiocalendar_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '1',
@@ -57,6 +58,12 @@ function aiocalendar_field_default_fields() {
           'settings' => array(),
           'type' => 'text_default',
           'weight' => '0',
+        ),
+        'ical' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -90,7 +97,7 @@ function aiocalendar_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-calendar_event-field_date'
+  // Exported field: 'node-calendar_event-field_date'.
   $fields['node-calendar_event-field_date'] = array(
     'field_config' => array(
       'active' => '1',
@@ -100,6 +107,7 @@ function aiocalendar_field_default_fields() {
       'field_name' => 'field_date',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'date',
       'settings' => array(
         'granularity' => array(
@@ -151,6 +159,12 @@ function aiocalendar_field_default_fields() {
           'type' => 'date_default',
           'weight' => '1',
         ),
+        'ical' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
@@ -187,7 +201,7 @@ function aiocalendar_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-calendar_event-field_event_location'
+  // Exported field: 'node-calendar_event-field_event_location'.
   $fields['node-calendar_event-field_event_location'] = array(
     'field_config' => array(
       'active' => '1',
@@ -208,6 +222,7 @@ function aiocalendar_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -234,6 +249,12 @@ function aiocalendar_field_default_fields() {
           'settings' => array(),
           'type' => 'text_default',
           'weight' => '2',
+        ),
+        'ical' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
         ),
         'teaser' => array(
           'label' => 'above',
@@ -262,7 +283,7 @@ function aiocalendar_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-calendar_event-field_event_type'
+  // Exported field: 'node-calendar_event-field_event_type'.
   $fields['node-calendar_event-field_event_type'] = array(
     'field_config' => array(
       'active' => '1',
@@ -283,6 +304,7 @@ function aiocalendar_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -318,6 +340,12 @@ function aiocalendar_field_default_fields() {
           'type' => 'hidden',
           'weight' => 0,
         ),
+        'ical' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
@@ -342,7 +370,7 @@ function aiocalendar_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-calendar_event-field_image'
+  // Exported field: 'node-calendar_event-field_image'.
   $fields['node-calendar_event-field_image'] = array(
     'field_config' => array(
       'active' => '1',
@@ -363,6 +391,7 @@ function aiocalendar_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,
@@ -396,6 +425,12 @@ function aiocalendar_field_default_fields() {
           'type' => 'image',
           'weight' => '3',
         ),
+        'ical' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
@@ -409,6 +444,7 @@ function aiocalendar_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 1,
+        'default_image' => 0,
         'file_directory' => 'events',
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',

@@ -7,11 +7,13 @@ Installation:
 
 1: Download AIOCalendar
 2: Download dependancies:
-drush dl beautytips better_exposed_filters calendar ctools date date_ical date_popup entity features filefield_sources image menu strongarm taxonomy token views 
+drush dl beautytips better_exposed_filters calendar ctools date date_ical date_popup entity features filefield_sources image menu strongarm taxonomy token views
 
 3: Enable AIO Calendar: 
 
 beautytips better_exposed_filters calendar ctools date date_ical date_popup entity features filefield_sources image menu strongarm taxonomy token views 
+
+
 
 
 ### Credit:
