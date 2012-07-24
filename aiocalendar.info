@@ -15,7 +15,6 @@ dependencies[] = date_popup
 dependencies[] = entity
 dependencies[] = features
 dependencies[] = filefield_sources
-dependencies[] = image
 dependencies[] = menu
 dependencies[] = strongarm
 dependencies[] = taxonomy
