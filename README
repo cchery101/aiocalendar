@@ -1,17 +1,15 @@
 The All-In-One Calendar is a an all inclusive calendar feature that can be easily downloaded and installed to give you a complete calendar solution for your Drupal website.
 
-AIOcalendar requires the [Features module](http://drupal.org/project/features) from [Drupal.org](http://drupal.org).
+AIOcalendar requires the [Features module](http://drupal.org/project/features) from [Drupal.org](http://drupal.org) as well as a handful of other modules. In addition to the standard calendar views, you will also find a list/agenda view of all your events that is a much clearer way to see upcoming events. Additionally you will find two blocks, a min-calendar block as well as a list view block.
 
 
-Installation: 
+## Installation: 
 
 1: Download AIOCalendar
 2: Download dependancies:
-drush dl beautytips better_exposed_filters calendar ctools date date_ical date_popup entity features filefield_sources image menu strongarm taxonomy token views
+drush dl beautytips better_exposed_filters calendar ctools date date_ical entity features filefield_sources strongarm taxonomy token views
+3: Enable the All-In-One Calendar Feature.
 
-3: Enable AIO Calendar: 
-
-beautytips better_exposed_filters calendar ctools date date_ical date_popup entity features filefield_sources image menu strongarm taxonomy token views 
 
 
 
