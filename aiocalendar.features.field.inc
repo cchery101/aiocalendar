@@ -234,7 +234,7 @@ function aiocalendar_field_default_fields() {
       'bundle' => 'calendar_event',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'Enter the location of the event.',
       'display' => array(
         'default' => array(
           'label' => 'inline',
@@ -486,6 +486,7 @@ function aiocalendar_field_default_fields() {
   t('<a href="/admin/structure/taxonomy/event_type/add">Add more categories here.</a>');
   t('Date');
   t('Description');
+  t('Enter the location of the event.');
   t('Event Type');
   t('Image');
   t('Location');
