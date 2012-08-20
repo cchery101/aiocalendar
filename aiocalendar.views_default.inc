@@ -29,7 +29,7 @@ function aiocalendar_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
-  $handler->display->display_options['exposed_form']['options']['autosubmit'] = 0;
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = 1;
   $handler->display->display_options['exposed_form']['options']['autosubmit_hide'] = 1;
   $handler->display->display_options['exposed_form']['options']['bef'] = array(
     'tid' => array(
@@ -73,7 +73,7 @@ function aiocalendar_views_default_views() {
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['title']['link_to_node'] = 1;
-  /* Field: Content: Date */
+  /* Field: Field: Date */
   $handler->display->display_options['fields']['field_date']['id'] = 'field_date';
   $handler->display->display_options['fields']['field_date']['table'] = 'field_data_field_date';
   $handler->display->display_options['fields']['field_date']['field'] = 'field_date';
@@ -184,7 +184,7 @@ function aiocalendar_views_default_views() {
     'event_type' => 0,
     'tags' => 0,
   );
-  /* Sort criterion: Content: Date -  start date (field_date) */
+  /* Sort criterion: Field: Date -  start date (field_date) */
   $handler->display->display_options['sorts']['field_date_value']['id'] = 'field_date_value';
   $handler->display->display_options['sorts']['field_date_value']['table'] = 'field_data_field_date';
   $handler->display->display_options['sorts']['field_date_value']['field'] = 'field_date_value';
@@ -194,8 +194,6 @@ function aiocalendar_views_default_views() {
   $handler->display->display_options['arguments']['date_argument']['field'] = 'date_argument';
   $handler->display->display_options['arguments']['date_argument']['default_action'] = 'default';
   $handler->display->display_options['arguments']['date_argument']['default_argument_skip_url'] = 0;
-  $handler->display->display_options['arguments']['date_argument']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['date_argument']['add_delta'] = 'yes';
   $handler->display->display_options['arguments']['date_argument']['date_fields'] = array(
     'field_data_field_date.field_date_value' => 'field_data_field_date.field_date_value',
   );
@@ -222,6 +220,13 @@ function aiocalendar_views_default_views() {
   $handler->display->display_options['filters']['tid']['type'] = 'select';
   $handler->display->display_options['filters']['tid']['vocabulary'] = 'event_type';
   $handler->display->display_options['filters']['tid']['error_message'] = 1;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'calendar_event' => 'calendar_event',
+  );
 
   /* Display: Month */
   $handler = $view->new_display('page', 'Month', 'page_1');
@@ -379,7 +384,7 @@ function aiocalendar_views_default_views() {
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['title']['link_to_node'] = 1;
-  /* Field: Content: Date */
+  /* Field: Field: Date */
   $handler->display->display_options['fields']['field_date']['id'] = 'field_date';
   $handler->display->display_options['fields']['field_date']['table'] = 'field_data_field_date';
   $handler->display->display_options['fields']['field_date']['field'] = 'field_date';
@@ -554,6 +559,13 @@ function aiocalendar_views_default_views() {
   $handler = $view->new_display('page', 'Events List', 'page_4');
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_date_1',
+      'rendered' => 1,
+      'rendered_strip' => 1,
+    ),
+  );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
@@ -595,7 +607,7 @@ function aiocalendar_views_default_views() {
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['title']['link_to_node'] = 1;
-  /* Field: Content: Date */
+  /* Field: Field: Date */
   $handler->display->display_options['fields']['field_date']['id'] = 'field_date';
   $handler->display->display_options['fields']['field_date']['table'] = 'field_data_field_date';
   $handler->display->display_options['fields']['field_date']['field'] = 'field_date';
@@ -707,6 +719,40 @@ function aiocalendar_views_default_views() {
     'event_type' => 0,
     'tags' => 0,
   );
+  /* Field: Field: Date */
+  $handler->display->display_options['fields']['field_date_1']['id'] = 'field_date_1';
+  $handler->display->display_options['fields']['field_date_1']['table'] = 'field_data_field_date';
+  $handler->display->display_options['fields']['field_date_1']['field'] = 'field_date';
+  $handler->display->display_options['fields']['field_date_1']['label'] = '';
+  $handler->display->display_options['fields']['field_date_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_date_1']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_date_1']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_date_1']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_date_1']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_date_1']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_date_1']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_date_1']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_date_1']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_date_1']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_date_1']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_date_1']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_date_1']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_date_1']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_date_1']['element_type'] = 'h2';
+  $handler->display->display_options['fields']['field_date_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_date_1']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_date_1']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_date_1']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_date_1']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_date_1']['settings'] = array(
+    'format_type' => 'month_year',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  $handler->display->display_options['fields']['field_date_1']['field_api_classes'] = 0;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['path'] = 'events/list';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'List';

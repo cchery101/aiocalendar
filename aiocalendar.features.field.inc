@@ -110,6 +110,8 @@ function aiocalendar_field_default_fields() {
       'locked' => '0',
       'module' => 'date',
       'settings' => array(
+        'cache_count' => '4',
+        'cache_enabled' => 0,
         'granularity' => array(
           'day' => 'day',
           'hour' => 'hour',
@@ -234,7 +236,7 @@ function aiocalendar_field_default_fields() {
       'bundle' => 'calendar_event',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'Enter the location of the event.',
+      'description' => '',
       'display' => array(
         'default' => array(
           'label' => 'inline',
@@ -486,7 +488,6 @@ function aiocalendar_field_default_fields() {
   t('<a href="/admin/structure/taxonomy/event_type/add">Add more categories here.</a>');
   t('Date');
   t('Description');
-  t('Enter the location of the event.');
   t('Event Type');
   t('Image');
   t('Location');
