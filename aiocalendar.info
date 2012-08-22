@@ -1,7 +1,7 @@
 name = All-in-One Calendar
 description = All-in-one calendar
 core = 7.x
-package = Features
+package = All-in-One
 php = 5.2.4
 version = 7.x-1.0-beta3
 project = aiocalendar
