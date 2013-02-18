@@ -73,12 +73,17 @@ function aiocalendar_views_post_render(&$view, &$output, &$cache) {
         </div>
         <div class="event-location">
           <strong>Location:</strong> ' . $value->field_field_event_location[0]['rendered']['#markup'] . '
-        </div>
-        <div class="event-description">
-          ' . truncate_utf8($value->field_body[0]['rendered']['#markup'] , 150, TRUE, TRUE, 10) . '
+        </div>';
+        
+      if (isset($value->field_body)) {
+        $event_tip .='<div class="event-description">
+            ' . truncate_utf8($value->field_body[0]['rendered']['#markup'] , 150, TRUE, TRUE, 10) . '
             <a href="' . base_path() . '/node/' . $value->nid . '" title="' . $value->node_title . '">' . t("Read more") . '</a>
-        </div>
-      </div></div>';
+          </div>';
+          
+      }
+      
+      $event_tip .='</div></div>';
 
       $options['bt_events_calendar' . $value->nid] = array(
         'cssSelect' => '.calendar\\.' . $value->nid . '\\.field_date\\.0\\.0',

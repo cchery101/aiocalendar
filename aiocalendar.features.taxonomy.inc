@@ -17,5 +17,13 @@ function aiocalendar_taxonomy_default_vocabularies() {
       'module' => 'aiocalendar',
       'weight' => '0',
     ),
+    'events' => array(
+      'name' => 'Events',
+      'machine_name' => 'events',
+      'description' => 'Select the type of event.',
+      'hierarchy' => '0',
+      'module' => 'taxonomy',
+      'weight' => '0',
+    ),
   );
 }

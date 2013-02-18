@@ -146,3 +146,17 @@ div.bef-checkboxes .form-item {
   background-color: #DFDFDF;
   padding: 0 .5em .25em;
 }
+
+label[for="edit-tid"]{
+  float: left;
+  padding-right: 10px;
+}
+
+a.bef-toggle{
+  float: right;
+}
+
+.views-exposed-widgets{
+  margin-bottom: 0;
+  font-size: 0.8em;
+}

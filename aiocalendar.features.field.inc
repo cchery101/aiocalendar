@@ -92,7 +92,7 @@ function aiocalendar_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => '5',
+        'weight' => '6',
       ),
     ),
   );
@@ -280,19 +280,19 @@ function aiocalendar_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '3',
+        'weight' => '4',
       ),
     ),
   );
 
-  // Exported field: 'node-calendar_event-field_event_type'.
-  $fields['node-calendar_event-field_event_type'] = array(
+  // Exported field: 'node-calendar_event-field_event_type_event'.
+  $fields['node-calendar_event-field_event_type_event'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'field_event_type',
+      'field_name' => 'field_event_type_event',
       'foreign keys' => array(
         'tid' => array(
           'columns' => array(
@@ -311,8 +311,8 @@ function aiocalendar_field_default_fields() {
       'settings' => array(
         'allowed_values' => array(
           0 => array(
+            'vocabulary' => 'events',
             'parent' => '0',
-            'vocabulary' => 'event_type',
           ),
         ),
       ),
@@ -321,26 +321,16 @@ function aiocalendar_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'calendar_event',
-      'default_value' => array(
-        0 => array(
-          'tid' => '2',
-        ),
-      ),
+      'default_value' => NULL,
       'deleted' => '0',
-      'description' => '<a href="/admin/structure/taxonomy/event_type/add">Add more categories here.</a>',
+      'description' => '<a href="/admin/structure/taxonomy/event/add">Add more categories here.</a>',
       'display' => array(
         'default' => array(
           'label' => 'above',
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => 4,
-        ),
-        'full' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
+          'weight' => 5,
         ),
         'ical' => array(
           'label' => 'above',
@@ -356,9 +346,10 @@ function aiocalendar_field_default_fields() {
         ),
       ),
       'entity_type' => 'node',
-      'field_name' => 'field_event_type',
+      'fences_wrapper' => 'div',
+      'field_name' => 'field_event_type_event',
       'label' => 'Event Type',
-      'required' => 0,
+      'required' => 1,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -478,14 +469,14 @@ function aiocalendar_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => '4',
+        'weight' => '5',
       ),
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('<a href="/admin/structure/taxonomy/event_type/add">Add more categories here.</a>');
+  t('<a href="/admin/structure/taxonomy/event/add">Add more categories here.</a>');
   t('Date');
   t('Description');
   t('Event Type');
