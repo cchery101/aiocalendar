@@ -46,6 +46,7 @@ features[variable][] = comment_form_location_calendar_event
 features[variable][] = comment_preview_calendar_event
 features[variable][] = comment_subject_field_calendar_event
 features[variable][] = field_bundle_settings_node__calendar_event
+features[variable][] = date_format_full
 features[variable][] = node_options_calendar_event
 features[views_view][] = events_calendar
 files[] = aiocalendar.module

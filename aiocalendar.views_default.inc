@@ -33,12 +33,22 @@ function aiocalendar_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['bef'] = array(
+    'general' => array(
+      'allow_secondary' => 0,
+      'secondary_label' => 'Advanced options',
+    ),
     'tid' => array(
       'bef_format' => 'bef',
       'more_options' => array(
         'bef_select_all_none' => 1,
         'bef_collapsible' => 0,
+        'is_secondary' => 0,
         'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+          ),
+        ),
       ),
     ),
   );
@@ -51,6 +61,20 @@ function aiocalendar_views_default_views() {
   $handler->display->display_options['style_options']['theme_style'] = '1';
   $handler->display->display_options['style_options']['max_items'] = '0';
   $handler->display->display_options['row_plugin'] = 'calendar_entity';
+
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['hide_alter_empty'] = FALSE;
+  /* Field: Content: Location */
+  $handler->display->display_options['fields']['field_event_location']['id'] = 'field_event_location';
+  $handler->display->display_options['fields']['field_event_location']['table'] = 'field_data_field_event_location';
+  $handler->display->display_options['fields']['field_event_location']['field'] = 'field_event_location';
   /* Field: Content: Date */
   $handler->display->display_options['fields']['field_date']['id'] = 'field_date';
   $handler->display->display_options['fields']['field_date']['table'] = 'field_data_field_date';
@@ -131,6 +155,7 @@ function aiocalendar_views_default_views() {
   );
   $handler->display->display_options['filters']['tid']['type'] = 'select';
   $handler->display->display_options['filters']['tid']['vocabulary'] = 'events';
+
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -471,6 +496,8 @@ function aiocalendar_views_default_views() {
       'rendered_strip' => 1,
     ),
   );
+  $handler->display->display_options['style_options']['row_class'] = 'row';
+  $handler->display->display_options['style_options']['default_row_class'] = FALSE;
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
@@ -548,6 +575,7 @@ function aiocalendar_views_default_views() {
   $handler->display->display_options['fields']['field_date_1']['label'] = '';
   $handler->display->display_options['fields']['field_date_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_date_1']['element_type'] = 'h2';
+  $handler->display->display_options['fields']['field_date_1']['element_class'] = 'title';
   $handler->display->display_options['fields']['field_date_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_date_1']['settings'] = array(
     'format_type' => 'short_date_long',
