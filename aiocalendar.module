@@ -62,7 +62,7 @@ function aiocalendar_views_pre_render(&$view) {
  */
 function aiocalendar_views_post_render(&$view, &$output, &$cache) {
 
-  if (!empty($view->result) && $view->current_display == 'page_1') {
+  if (!empty($view->result) && $view->current_display == 'page_1' && $view->name == 'events_calendar') {
     foreach ($view->result as $value) {
       // dpm($value);
       
@@ -70,16 +70,12 @@ function aiocalendar_views_post_render(&$view, &$output, &$cache) {
         <h2><a href="' . base_path() . '/node/' . $value->nid . '" title="' . $value->node_title . '">' . $value->node_title . '</a></h2>
         <div class="event-time">
           <strong>Time:</strong> ' . $value->field_field_date[0]['rendered']['#markup'] . '
-        </div>
-        <div class="event-location">
-          <strong>Location:</strong> ' . $value->field_field_event_location[0]['rendered']['#markup'] . '
         </div>';
         
         if (isset($value->field_body)) {
           $event_tip .='<div class="event-description">
               ' . truncate_utf8($value->field_body[0]['rendered']['#markup'] , 150, TRUE, TRUE, 10) . '
-              <a href="' . base_path() . '/node/' . $value->nid . '" title="' . $value->node_title . '">' . t("Read more") . '</a>
-            </div>';
+              <a href="' . base_path() . '/node/' . $value->nid . '" title="' . $value->node_title . '">' . t("Read more") . '</a></div>';
           
         }
       
