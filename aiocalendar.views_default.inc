@@ -61,20 +61,6 @@ function aiocalendar_views_default_views() {
   $handler->display->display_options['style_options']['theme_style'] = '1';
   $handler->display->display_options['style_options']['max_items'] = '0';
   $handler->display->display_options['row_plugin'] = 'calendar_entity';
-
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title']['hide_alter_empty'] = FALSE;
-  /* Field: Content: Location */
-  $handler->display->display_options['fields']['field_event_location']['id'] = 'field_event_location';
-  $handler->display->display_options['fields']['field_event_location']['table'] = 'field_data_field_event_location';
-  $handler->display->display_options['fields']['field_event_location']['field'] = 'field_event_location';
   /* Field: Content: Date */
   $handler->display->display_options['fields']['field_date']['id'] = 'field_date';
   $handler->display->display_options['fields']['field_date']['table'] = 'field_data_field_date';
@@ -155,7 +141,6 @@ function aiocalendar_views_default_views() {
   );
   $handler->display->display_options['filters']['tid']['type'] = 'select';
   $handler->display->display_options['filters']['tid']['vocabulary'] = 'events';
-
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -163,6 +148,14 @@ function aiocalendar_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'calendar_event' => 'calendar_event',
   );
+  /* Filter criterion: Content: Date - end date (field_date:value2) */
+  $handler->display->display_options['filters']['field_date_value2']['id'] = 'field_date_value2';
+  $handler->display->display_options['filters']['field_date_value2']['table'] = 'field_data_field_date';
+  $handler->display->display_options['filters']['field_date_value2']['field'] = 'field_date_value2';
+  $handler->display->display_options['filters']['field_date_value2']['operator'] = '>';
+  $handler->display->display_options['filters']['field_date_value2']['granularity'] = 'second';
+  $handler->display->display_options['filters']['field_date_value2']['form_type'] = 'date_text';
+  $handler->display->display_options['filters']['field_date_value2']['default_date'] = 'now';
 
   /* Display: Month */
   $handler = $view->new_display('page', 'Month', 'page_1');
