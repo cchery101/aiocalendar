@@ -31,7 +31,6 @@ function aiocalendar_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
-  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['bef'] = array(
     'general' => array(
@@ -577,8 +576,7 @@ function aiocalendar_views_default_views() {
   $handler->display->display_options['fields']['field_event_location']['id'] = 'field_event_location';
   $handler->display->display_options['fields']['field_event_location']['table'] = 'field_data_field_event_location';
   $handler->display->display_options['fields']['field_event_location']['field'] = 'field_event_location';
-  $handler->display->display_options['fields']['field_event_location']['label'] = '';
-  $handler->display->display_options['fields']['field_event_location']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_event_location']['element_label_type'] = 'span';
   $handler->display->display_options['fields']['field_event_location']['element_wrapper_type'] = 'div';
   $handler->display->display_options['fields']['field_event_location']['element_wrapper_class'] = 'event_location';
   $handler->display->display_options['fields']['field_event_location']['element_default_classes'] = FALSE;
@@ -589,7 +587,10 @@ function aiocalendar_views_default_views() {
   $handler->display->display_options['fields']['body']['label'] = '';
   $handler->display->display_options['fields']['body']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['body']['alter']['text'] = '[title] - [body]';
-  $handler->display->display_options['fields']['body']['alter']['max_length'] = '400';
+  $handler->display->display_options['fields']['body']['alter']['max_length'] = '300';
+  $handler->display->display_options['fields']['body']['alter']['more_link'] = TRUE;
+  $handler->display->display_options['fields']['body']['alter']['more_link_text'] = 'Read more';
+  $handler->display->display_options['fields']['body']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['body']['element_type'] = 'span';
   $handler->display->display_options['fields']['body']['element_class'] = 'event_desc';
   $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
@@ -598,14 +599,15 @@ function aiocalendar_views_default_views() {
   $handler->display->display_options['fields']['term_node_tid']['id'] = 'term_node_tid';
   $handler->display->display_options['fields']['term_node_tid']['table'] = 'node';
   $handler->display->display_options['fields']['term_node_tid']['field'] = 'term_node_tid';
-  $handler->display->display_options['fields']['term_node_tid']['label'] = '';
-  $handler->display->display_options['fields']['term_node_tid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['term_node_tid']['label'] = 'Type';
+  $handler->display->display_options['fields']['term_node_tid']['limit'] = TRUE;
   $handler->display->display_options['fields']['term_node_tid']['vocabularies'] = array(
+    'event_type' => 'event_type',
     'classified_categories' => 0,
-    'event_type' => 0,
-    'events' => 0,
     'issue' => 0,
+    'news_sections' => 0,
     'organization' => 0,
+    'quote_type' => 0,
     'section_categories' => 0,
     'tags' => 0,
   );

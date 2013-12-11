@@ -77,6 +77,9 @@ function aiocalendar_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_event_type_event',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'foreign keys' => array(
       'tid' => array(
         'columns' => array(
@@ -95,7 +98,7 @@ function aiocalendar_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         0 => array(
-          'vocabulary' => 'events',
+          'vocabulary' => 'event_type',
           'parent' => 0,
         ),
       ),

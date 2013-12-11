@@ -78,7 +78,65 @@ function aiocalendar_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__calendar_event';
   $strongarm->value = array(
-    'view_modes' => array(),
+    'view_modes' => array(
+      'teaser' => array(
+        'custom_settings' => TRUE,
+      ),
+      'tagged_text' => array(
+        'custom_settings' => TRUE,
+      ),
+      'full' => array(
+        'custom_settings' => FALSE,
+      ),
+      'rss' => array(
+        'custom_settings' => FALSE,
+      ),
+      'search_index' => array(
+        'custom_settings' => FALSE,
+      ),
+      'search_result' => array(
+        'custom_settings' => FALSE,
+      ),
+      'ical' => array(
+        'custom_settings' => FALSE,
+      ),
+      'diff_standard' => array(
+        'custom_settings' => FALSE,
+      ),
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
+      'author_feature' => array(
+        'custom_settings' => FALSE,
+      ),
+      'author_title' => array(
+        'custom_settings' => FALSE,
+      ),
+      'cover' => array(
+        'custom_settings' => FALSE,
+      ),
+      'cover_feature' => array(
+        'custom_settings' => FALSE,
+      ),
+      'inprint_cover' => array(
+        'custom_settings' => FALSE,
+      ),
+      'print_version' => array(
+        'custom_settings' => FALSE,
+      ),
+      'section_feature' => array(
+        'custom_settings' => FALSE,
+      ),
+      'social_updates' => array(
+        'custom_settings' => FALSE,
+      ),
+      'preview' => array(
+        'custom_settings' => FALSE,
+      ),
+      'revision' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
     'extra_fields' => array(
       'form' => array(
         'title' => array(
